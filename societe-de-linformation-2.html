@@ -1,0 +1,1912 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css" />
+		<link rel="stylesheet" href="dist/reveal.css" />
+		<link rel="stylesheet" href="dist/theme/white.css" />
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+
+		<script type="module">
+		  import mermaid from
+			"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+		  mermaid.initialize({
+			startOnLoad: true,
+			theme: "base",
+
+			themeVariables: {
+			fontFamily: "Arial, sans-serif",
+			fontSize: "16px"
+			},
+
+			flowchart: {
+			nodeSpacing: 20,
+			rankSpacing: 30,
+			diagramPadding: 5,
+			curve: "basis",
+			useMaxWidth: true
+			}
+		});
+		</script>
+		<style>
+			.reveal .slide-titre {
+			  height: 100%;
+			  box-sizing: border-box;
+
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+
+			  padding: 60px;
+			
+			  color: white;
+			  text-align: center;
+			}
+
+			.reveal .slide-titre h1 {
+			  margin-top: 100px;
+			  color: white;
+
+			  font-size: 1.8em;
+			  line-height: 1.15;
+			  font-weight: bold;
+			}
+
+			.reveal .slide-intertitre {
+			  height: 100%;
+			  box-sizing: border-box;
+
+			  display: flex;
+			  align-items: center;
+		 	  justify-content: center;
+
+			  padding: 60px;
+			
+			  color: white;
+			  text-align: center;
+			}
+
+			.reveal .slide-intertitre h1 {
+			  margin-top: 100px;
+			  color: black;
+
+			  font-size: 1.5em;
+			  line-height: 1.15;
+			  font-weight: bold;
+			}
+
+			.reveal .slide-standard {
+			  height: 100%;
+			  box-sizing: border-box;
+
+			  padding-top: 100px;
+			  text-align: left;
+
+			  font-size: 0.65em;
+			}
+
+			.reveal .slide-standard .grande-frise {
+			  display: block;
+			  width: 98%;
+			  max-width: none;
+			  height: auto;
+			  margin: 0 auto;
+			}
+
+			.reveal .titre-slide {
+  			  position: absolute;
+  			  top: 0;	
+  			  left: 0;
+
+  			  width: fit-content;
+  			  max-width: 100%;
+
+  			  margin: 0;
+  			  padding: 20px 70px 20px 35px;
+
+  			  color: white;
+  			  background: #27346f;
+
+  			  font-size: 1em;
+  			  line-height: 1;
+  			  text-align: left;
+
+  			  clip-path: polygon(
+  			  0 0,
+  			  100% 0,
+  			  100% 65%,
+  			  calc(100% - 55px) 65%,
+  			  calc(100% - 55px) 100%,
+  			  0 100%
+			  );
+			}
+
+			.reveal .zone-coin-droit {
+  			  position: fixed;
+  			  right: 0;
+  			  bottom: 0;
+
+  			  width: 800px;
+  			  height: 90px;
+  			  padding: 20px 25px;
+
+  			  display: flex;
+  			  justify-content: flex-end;
+ 			  align-items: flex-end;
+
+  			  background: #27346f;
+
+			  clip-path: polygon(
+  			  100px 0,
+  			  100% 0,
+  			  100% 100%,
+  			  0 100%,
+  			  0 20%,
+  			  100px 20%
+			);
+
+  			  z-index: 5;
+			  pointer-events: none;
+			}
+
+			.reveal .zone-coin-droit .logo-mediam {
+			display: none;
+			}
+
+			.reveal:has(.slide-titre.present) .zone-coin-droit {
+			background-color: white;
+			}
+
+			.reveal:has(.slide-titre.present) .zone-coin-droit .logo-mediam {
+			display: block;
+			width: 800px;
+			height: auto;
+			margin: 0;
+			}
+
+			.reveal .controls {
+  			  z-index: 30;
+  			  color: white;
+			}
+
+			.reveal:has(.slide-titre.present) .controls {
+			color: #0070b9;
+			}
+
+			.reveal .plusieurs-colonnes {
+  			  display: flex;
+  			  gap: 15px;
+  			  align-items: flex-start;
+			}
+
+			.reveal .plusieurs-colonnes .element {
+ 			  flex: 1;
+  			  text-align: center;
+			}
+
+			.reveal .plusieurs-colonnes img {
+  			  width: 100%;
+  			  height: auto;
+			}
+
+			.reveal .boite-image {
+  			  display: inline-block;
+  			  line-height: 0;
+			  border: 4px solid #000;
+  			  background-color: white;
+			  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+			}
+
+			.reveal .boite-image img {
+  			  display: block;
+  			  width: 100%;
+  			  margin: 0;
+			  max-width: none;
+			}
+
+			.reveal .image-et-texte {
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			  gap: 35px;
+			  width: 100%;
+			}
+
+			.reveal .image-et-texte .boite-image {
+			  flex: 0 0 auto;
+			}
+
+			.reveal .image-et-texte .boite-image img {
+			  display: block;
+			  height: 250px;
+			  width: auto;
+			  margin: 0;
+			}
+
+			.reveal .texte-image {
+			  width: 40%;
+			  text-align: left;
+			}
+
+			.reveal .forme {
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+
+			  padding: 15px;
+			  box-sizing: border-box;
+			  text-align: center;
+
+			  background-color: #D8EFDC;
+			  border: 4px solid #489773;
+			}
+
+			.reveal .cercle {
+			  border-radius: 50%;
+			}
+
+			.reveal pre.mermaid {
+			  width: 100%;
+			  max-width: none;
+			  margin: 0;
+			  background: transparent;
+			  box-shadow: none;
+			}
+
+			.reveal pre.mermaid {
+			  width: 90%;
+			  margin: 0 auto;
+			}
+
+			.reveal pre.mermaid svg {
+			  display: block;
+			  width: 100%;
+			  height: auto;
+		  	  max-height: 600px;
+			  margin: 0 auto;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+
+			<div class="zone-coin-droit">
+				<img 
+				  class="logo-mediam" 
+				  src="societe-de-linformation-1/Logo_Mediam.png" 
+				  alt="Logo">
+			</div>
+
+				<div class="slides">
+
+					<section class="slide-titre" data-background-color="#0070b9">
+						<h1>[Culture générale] La société de l’information II</h1>
+						<p style="font-size: 0.7em; text-align: left;"><em>Samuel Jamet</em></p>
+						<p style="font-size: 0.7em; text-align: left;"><em>Université Paris Cité, BIUM</em></p>
+					</section>
+
+					<section class="slide-standard">
+					</section>
+					
+					<!--                                 -->
+					<!-- Annonce du plan de la formation -->
+					<!--                                 -->
+					
+					<section class="slide-standard">
+						<h2 class="titre-slide">Plan de la formation</h2>
+						<div class="fragment fade-up" style="font-size: 0.8em; margin: 24px 0; padding: 18px 22px; background-color: #ceeafb; border-left: 4px solid #27346f; border-radius: 6px;">
+						<p style="margin: 0 0 8px 0; font-weight: bold; color: #27346f;">7 décembre 2026 - 9h-12h</p>
+						<ol>
+							<li>Une (courte) histoire du journalisme</li>
+							<li><strong>PAUSE</strong></li>
+							<li>La fabrique de l'information</li>
+							<ol>
+								<li>Réglementation, éthique et déontologie des médias ;</li>
+								<li>Les fondamentaux de la pratique du journalisme</li>
+							</ol>
+						</ol>
+						</div>
+						<div class="fragment fade-up" style="font-size: 0.8em; margin: 24px 0; padding: 18px 22px; background-color: #ceeafb; border-left: 4px solid #27346f; border-radius: 6px;">
+						<p style="margin: 0 0 8px 0; font-weight: bold; color: #27346f;">15 janvier 2027 - 9h-12h</p>
+						<ol>
+							<li>Comment raconter des histoires (vraies ou fausses)</li>
+							<ol>
+								<li>Narratologie médiatique : étude de cas ;</li>
+								<li>Analyse critique des médias ;</li>
+								<li>Quelques grands mécanisme de la désinformation</li>
+							</ol>
+							<li><strong>PAUSE</strong></li>
+							<li>Élément pour une littératie algorithmique.</li>
+						</ol>
+						</div>
+					</section>
+
+					<!--                                                    -->
+					<!-- Première partie : Comment raconter des histoires ? -->
+					<!--                                                    -->
+
+					<section class="slide-intertitre" data-background-color="#cdeafb">
+						<h1>Comment raconter des histoires ?</h1>
+						<p style="color: black;">(vraies ou fausses)</p>
+						<p style="color: black; font-size: 0.8em;"><em>Narratologie médiatique</em></p>
+					</section>
+
+					<section class="slide-standard">
+						<div style="justify-content: center; align-items: center; margin: 100px 0; background-color: #27346f; border: 20px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+							<p class="r-fit-text" style="text-align: center; color: white;">La quête de l'Oiseau Blanc</p>
+						</div>
+					</section>
+
+					<section class="slide-standard" data-auto-animate>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment">
+								<div class="boite-image" data-id="nungesser">
+									<img 
+									  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+									  data-preview-image
+									  alt="Photographie de Charle Nungesser"
+									  style="height: 400px; width: auto;">
+								</div>
+								<p>Charles Nungesser</p>
+							</div>
+							<div class="element fragment">
+								<div class="boite-image" data-id="coli">
+									<img 
+									  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+									  data-preview-image
+									  alt="Photographie de François Coli"
+									  style="height: 400px; width: auto;">
+								</div>
+								<p>François Coli</p>
+							</div>
+						</div>
+					</section>
+
+					<section class="slide-standard" data-auto-animate>
+						<div class="plusieurs-colonnes" style="align-items: center;">
+							<div class="element">
+								<div class="boite-image" data-id="nungesser">
+									<img 
+									  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+									  data-preview-image
+									  alt="Photographie de Charle Nungesser"
+									  style="height: 400px; width: auto;">
+								</div>
+								<p>Charles Nungesser</p>
+							</div>
+							<div class="element">
+								<img src="./societe-de-linformation-2/oiseau_blanc/Globe.svg"
+								style="height: 280px; width: auto;">
+							</div>
+							<div class="element">
+								<div class="boite-image" data-id="coli">
+									<img 
+									  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+									  data-preview-image
+									  alt="Photographie de François Coli"
+									  style="height: 400px; width: auto;">
+								</div>
+								<p>François Coli</p>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<section class="slide-standard" data-auto-animate>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes" style="align-items: center;">
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de Charle Nungesser"
+											  style="height: 400px; width: auto;">
+										</div>
+										<p>Charles Nungesser</p>
+									</div>
+									<div class="element">
+										<img src="./societe-de-linformation-2/oiseau_blanc/Globe.svg"
+										style="height: 280px; width: auto;">
+									</div>
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de François Coli"
+											  style="height: 400px; width: auto;">
+										</div>
+										<p>François Coli</p>
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/costes-et-rignot.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto;">
+								<img
+								  class="fragment fade-up"
+								  src="./societe-de-linformation-2/oiseau_blanc/avion_oiseau_blanc.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto;">
+							</div>
+						</section>
+
+						<!-- 25/04/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">25/04/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes" style="align-items: center;">
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de Charle Nungesser"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>Charles Nungesser</p>
+									</div>
+									<div class="element">
+										<img src="./societe-de-linformation-2/oiseau_blanc/Globe.svg"
+										style="height: 280px; width: auto; filter: blur(5px);">
+									</div>
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de François Coli"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>François Coli</p>
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/costes-et-rignot.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/avion_oiseau_blanc.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_25-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 27/04/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">27/04/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes" style="align-items: center;">
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de Charle Nungesser"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>Charles Nungesser</p>
+									</div>
+									<div class="element">
+										<img src="./societe-de-linformation-2/oiseau_blanc/Globe.svg"
+										style="height: 280px; width: auto; filter: blur(5px);">
+									</div>
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de François Coli"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>François Coli</p>
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/costes-et-rignot.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/avion_oiseau_blanc.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_25-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								 <img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 04/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">04/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes" style="align-items: center;">
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/nungesser_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de Charle Nungesser"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>Charles Nungesser</p>
+									</div>
+									<div class="element">
+										<img src="./societe-de-linformation-2/oiseau_blanc/Globe.svg"
+										style="height: 280px; width: auto; filter: blur(5px);">
+									</div>
+									<div class="element">
+										<div class="boite-image">
+											<img 
+											  src="./societe-de-linformation-2/oiseau_blanc/coli_photo.jpg"
+											  data-preview-image
+											  alt="Photographie de François Coli"
+											  style="height: 400px; width: auto; filter: blur(5px);">
+										</div>
+										<p>François Coli</p>
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/costes-et-rignot.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/avion_oiseau_blanc.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								 <img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								 <img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_04-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 05-6/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">05-06/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/costes-et-rignot.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/avion_oiseau_blanc.jpg"
+								  data-preview-image
+								  style="height: 450px; width: auto; filter: blur(5px);">
+								 <img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								 <img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_04-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								 <div class="plusieurs-colonnes">
+								 	<div class="element">
+										<img
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img
+										  class="fragment fade-up"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_2.png"
+										  data-preview-image
+										  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 07/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">07/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-04-1927.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_04-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+								 	<div class="element">
+										<img
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="fragment fade-up"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_2.png"
+										  data-preview-image
+										  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_07-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 08/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">08/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_04-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+								 	<div class="element">
+										<img
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="fragment fade-up"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_05-05-1927_2.png"
+										  data-preview-image
+										  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_07-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_08-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 09/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">09/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_09-05-1927_1.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<img
+								  class="fragment fade-up"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_09-05-1927_2.png"
+								  data-preview-image
+								  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 09/05/1927 : trajet -->
+
+						<section class="slide-standard">
+							<h2 class="titre-slide">09/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_1.svg"
+								  style="height: 500px; width: auto;">
+								<img
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_2.svg"
+								  style="height: 500px; width: auto;">
+								<img
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_3.svg"
+								  style="height: 500px; width: auto;">
+								<img
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_4.svg"
+								  style="height: 500px; width: auto;">
+								<img
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_5.svg"
+								  style="height: 500px; width: auto;">
+								<img
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/trajet_6.svg"
+								  style="height: 500px; width: auto;">
+							</div>
+						</section>
+
+						<!-- 10/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">10/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 10/05/1927 édition spéciale !! (1) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">10/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927_2.png"
+								  data-preview-image
+								  style="height: 1100px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 10/05/1927 édition spéciale !! (2) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">10/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927_2.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 11/05/1927 (1) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">11/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927_2.png"
+								  data-preview-image
+								  style="height: 200px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 11/05/1927 (2) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">11/05/1927</h2>
+							<div class=r-stack>
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927.png"
+								  data-preview-image
+								  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<img
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_10-05-1927_2.png"
+								  data-preview-image
+								  style="height: 200px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element fragment">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927_3.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 12/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">12/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-05-1927_3.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element fragment">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 13/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">13/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 14/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">14/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_12-05-1927_1.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_1.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise fragment fade-up"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_2.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+							</div>
+						</section>
+
+						<!-- 15-16/05/1927 -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">15-16/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_1.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_2.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927.png"
+										  data-preview-image
+										  style="height: 400px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p>15/05/1927</p>
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927_1.png"
+										  data-preview-image
+										  style="height: 450px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise fragment fade-up"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+							<p class="fragment fade-up">16/05/1927</p>
+						</section>
+
+						<!-- 16-20/05/1927 (Nungesser et Coli) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">16-20/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_1.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_2.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927_1.png"
+										  data-preview-image
+										  style="height: 350px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 13-17/05/1927 (Lindbergh) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">13-17/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_1.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 21-22/05/1927 (Lindbergh) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">21-22/05/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_1.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_21-22-05-1927_1.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_21-22-05-1927_2.png"
+										  data-preview-image
+										  style="height: 400px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 24/05-09/06/1927 (Lindbergh) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">24/05-09/06/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_1.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_13-17-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_21-22-05-1927_1.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_21-22-05-1927_2.png"
+										  data-preview-image
+										  style="height: 400px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img
+								  class="grande-frise fragment" 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_1.png"
+								  data-preview-image
+								  style="height: 600px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<img
+								  class="grande-frise fragment" 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_2.png"
+								  data-preview-image
+								  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<img
+								  class="grande-frise fragment" 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_3.png"
+								  data-preview-image
+								  style="height: 200px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<img
+								  class="grande-frise fragment" 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_4.png"
+								  data-preview-image
+								  style="height: 600px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise fragment"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_5.png"
+										  data-preview-image
+										  style="height: 400px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise fragment"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_6.png"
+										  data-preview-image
+										  style="height: 400px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img
+								  		  class="grande-frise fragment" 
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_7.png"
+										  data-preview-image
+										  style="height: 600px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+								<img
+								  class="grande-frise fragment" 
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_8.png"
+								  data-preview-image
+								  style="height: 600px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise fragment"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_9.png"
+										  data-preview-image
+										  style="height: 700px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise fragment"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-05-09-06-1927_10.png"
+										  data-preview-image
+										  style="height: 600px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 19/06/1927 (Nungesser et Coli) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">19/06/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_1.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_14-05-1927_2.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927_1.png"
+										  data-preview-image
+										  style="height: 350px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_19-06-1927_2.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 06-16/07/1927 (Nungesser et Coli) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">06-16/07/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927.png"
+										  data-preview-image
+										  style="height: 300px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_15-05-1927_1.png"
+										  data-preview-image
+										  style="height: 350px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-05-1927.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927.png"
+										  data-preview-image
+										  style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_16-20-05-1927_2.png"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise fragment"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_19-06-1927_2.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<div class="plusieurs-colonnes">
+									<div class="element fragment">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element fragment">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_1.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element fragment">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_2.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 24/07/1927 (Nungesser et Coli) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">24/07/1927</h2>
+							<div class=r-stack>
+								<img 
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_19-06-1927_2.png"
+								  data-preview-image
+								  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+								<div class="plusieurs-colonnes">
+									<div class="element ">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_1.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_2.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<img 
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-07-1927.jpg"
+								  data-preview-image
+								  style="height: 800px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							</div>
+						</section>
+
+						<!-- 27/07/1927 (Nungesser et Coli) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">27/07/1927</h2>
+							<div class=r-stack>
+								<div class="plusieurs-colonnes">
+									<div class="element ">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_1.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_06-16-07-1972_2.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4); filter: blur(5px);">
+									</div>
+								</div>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_24-07-1927.jpg"
+										  data-preview-image
+										  style="height: 800px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+									<div class="element">
+										<img 
+										  class="grande-frise"
+										  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-07-1927.jpg"
+										  data-preview-image
+										  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- 27/06/1927 (Bilan) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">11/07/1927</h2>
+							<img 
+							  class="grande-frise"
+							  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-06-1927.jpg"
+							  data-preview-image
+							  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+						</section>
+
+						<!-- 11/07/1927 (Bilan) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">11/07/1927</h2>
+							<div class="plusieurs-colonnes">
+								<div class="element">
+									<img 
+									  class="grande-frise"
+									  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-06-1927.jpg"
+									  data-preview-image
+									  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								</div>
+								<div class="element">
+									<img 
+									  class="grande-frise"
+									  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-07-1927.jpg"
+									  data-preview-image
+									  style="height: 800px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								</div>
+							</div>
+						</section>
+
+						<!-- 18/07/1927 (Bilan) -->
+
+						<section class="slide-standard" data-auto-animate>
+							<h2 class="titre-slide">18/07/1927</h2>
+							<div class="plusieurs-colonnes">
+								<div class="element">
+									<img 
+									  class="grande-frise"
+									  src="./societe-de-linformation-2/oiseau_blanc/la_presse_27-06-1927.jpg"
+									  data-preview-image
+									  style="height: 500px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								</div>
+								<div class="element">
+									<img 
+									  class="grande-frise"
+									  src="./societe-de-linformation-2/oiseau_blanc/la_presse_11-07-1927.jpg"
+									  data-preview-image
+									  style="height: 800px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								</div>
+								<div class="element">
+									<img 
+									  class="grande-frise"
+									  src="./societe-de-linformation-2/oiseau_blanc/la_presse_18-07-1927.jpg"
+									  data-preview-image
+									  style="height: 800px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								</div>
+							</div>
+						</section>
+
+						<!-- Epilogue -->
+
+						<section class="slide-standard" data-auto-animate>
+							<div class="r-stack">
+								<img 
+								class="grande-frise"
+								src="./societe-de-linformation-2/oiseau_blanc/Carte_postale-Nungesser_et_Coli-1927-4016921547.jpg"
+								data-preview-image
+								style="height: 550px; width: auto; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+								<p class="r-fit-text fragment">Épilogue</p>
+							</div>
+						</section>
+					</section>
+
+					<!--                                         -->
+					<!-- Partie 1 Comment raconter des histoires -->
+					<!--            Narratologie                 -->
+
+					<section class="slide-standard">
+						<div style="justify-content: center; align-items: center; margin: 100px 0; background-color: #27346f; border: 20px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+							<p class="r-fit-text" style="text-align: center; color: white;">Analyse narratologique</p>
+						</div>
+					</section>
+
+					<!--                               -->
+					<!-- Définition de la narratologie -->
+					<!--                               -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">En deux mots, la narratologie...</h2>
+						<div style="justify-content: center; align-items: center; margin: 12px 0; background-color: #D8EFDC; border: 5px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+							<p style="text-align: center;">Etude de la narration, analyse des formes et des formats narratifs</p>
+						</div>
+						<div class="plusieurs-colonnes" style="margin-top: 40px; align-items: center;">
+							<div class="element">
+								<p style="font-size: 2em;">Autrement<br>dit :</p>
+							</div>
+							<div class="element">
+								<div class="fragment fade-left" style="justify-content: center; align-items: center; margin: 12px 0; background-color: #489773; border: 5px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; font-size: 0.8em; color: white;">Comment on raconte ce qu’on raconte ?</p>
+								</div>
+								<div class="fragment fade-left" style="justify-content: center; align-items: center; margin: 12px 0; background-color: #489773; border: 5px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; font-size: 0.8em; color: white;">Comment fait-on d’une histoire un récit ?</p>
+								</div>
+								<div class="fragment fade-left" style="justify-content: center; align-items: center; margin: 12px 0; background-color: #489773; border: 5px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; font-size: 0.8em; color: white;">Et comment fait-on d’une histoire un bon récit ?<br>(et qu’est-ce qu’un <em>bon</em> récit ?)</p>
+								</div>
+							</div>
+						</pre>
+					</section>
+
+					<!--                                         -->
+					<!-- Distinction conceptuelles fondamentales -->
+					<!--                                         -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Distinctions conceptuelles fondamentales</h2>
+						<p>Et en quoi cela concerne aussi le récit médiatique ?</p>
+
+					<!-- L'intrigue -->
+
+						<div class="plusieurs-colonnes fragment" style="align-items: center; justify-content: center;">
+							<div class="element<!--                                         -->
+					<!-- Distinction conceptuelles fondamentales -->
+					<!--                                         -->" style="flex: 1;">
+								<div style="margin: 10px 0; background-color: #27346f; border: 4px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; color: white; font-size: 0.7em;">L'intrigue</p>
+								</div>
+							</div>
+							<div class="element" style="flex: 3;">
+								<div style="	
+								  width: 500px;
+								  height: 40px;
+								  background-color: #EA7727;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								  display: flex;
+								  align-items: center;
+								  box-sizing: border-box;
+								  padding: 0 20px;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+								  <p style="font-size: 0.8em; margin: 0; color: #ffff"><strong>Présente quand il y a une tension narrative</strong></p>
+								</div>
+							</div>
+							<div class="element" style="flex: 1;">
+								<ul>
+									<li>Suspens</li>
+									<li>Curiosité</li>
+									<li>Surprise</li>
+								</ul>
+							</div>
+						</div>
+
+					<!-- L'histoire -->
+
+						<div class="plusieurs-colonnes fragment" style="align-items: center; justify-content: center;">
+							<div class="element" style="flex: 1;">
+								<div style="margin: 10px 0; background-color: #27346f; border: 4px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; color: white; font-size: 0.7em;">L'histoire</p>
+								</div>
+							</div>
+							<div class="element" style="flex: 4;">
+								<p style="text-align: left; font-size: 0.8em;">(re)Construction mentale exhaustive de <strong>ce qu’il s’est passé</strong>.<br>Attention, ce n’est pas l’enchainement causal réel, c’est bien une reconstruction, ou une construction</p>
+							</div>
+						</div>
+
+					<!-- Le récit -->
+
+						<div class="plusieurs-colonnes fragment" style="align-items: center; justify-content: center;">
+							<div class="element" style="flex: 1;">
+								<div style="margin: 10px 0; background-color: #27346f; border: 4px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+									<p style="text-align: center; color: white; font-size: 0.7em;">Le récit</p>
+								</div>
+							</div>
+							<div class="element" style="flex: 4;">
+								<p style="text-align: left; font-size: 0.8em;">Manifestation de l’histoire, matériau (ici, soyez terre-à-terre !), ce qui est écrit, filmé, peint…</p>
+							</div>
+						</div>
+
+					<!-- Application en narratologie médiatique -->
+
+					<div style="width: 500px; margin: 10px 0; background-color: #27346f; border: 4px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+						<p style="text-align: left; margin-left: 10px; margin-right: 10px; color: white; font-size: 0.8em;">Ces distinctions sont présentes dès lors que l’on raconte quelque chose, elles jouent donc à plein dans le régime médiatique</p>
+
+					</section>
+
+					<!--                                                -->
+					<!-- Distinction Récit canonique / récit médiatique -->
+					<!--                                                -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Récit médiatique vs. Récit canonique</h2>
+						<table style="font-size: 0.8em; border-radius: 12px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+							<tr>
+								<th style="text-align: center; background-color: #27346f; color: white;">Type de récit</th>
+								<th style="text-align: center; background-color: #27346f; color: white;">Rythme et tempo</th>
+								<th style="text-align: center; background-color: #27346f; color: white;">Qui raconte ?</th>
+								<th style="text-align: center; background-color: #27346f; color: white;">Totalisation narrative</th>
+							</tr>
+							<tr>
+								<td style="text-align: center; background-color: #27346f; color: white;"><strong>Canonique</strong></td>
+								<td style="text-align: center; background-color: #CEEAFB;">Maîtrise du temps, le narrateur peut choisir de faire avancer son récit comme il le souhaite</td>
+								<td style="text-align: center; background-color: #CEEAFB;">Un nombre limité de narrateurs, même dans des récits chorals où ils sont bien identifiés, ou récurrents.</td>
+								<td style="text-align: center; background-color: #CEEAFB;">Généralement le fait de l’auteurice, dans le canonique, il est difficile de confronter la totalisation avec ce qui a été totalisé.</td>
+							</tr> 
+							<tr>
+								<td style="text-align: center; background-color: #27346f; color: white;"><strong>Médiatique</strong></td>
+								<td style="text-align: center; background-color: #F1F9FE;">Pas de maîtrise, situation de blocage du récit (IL NE SE PASSE RIEN), seule possibilité, ne plus rien raconter, ou raconter du rien</td>
+								<td style="text-align: center; background-color: #F1F9FE;">Régime de la polyphonie, concurrence entre beaucoup de narrateurs, beaucoup d’angles éditoriaux.</td>
+								<td style="text-align: center; background-color: #F1F9FE;">Très compliquée à mener à cause de la polyphonie et de la non-maîtrise du rythme, l’analyse du récit va dépendre de qui a fait la totalisation narrative, qui a reconstruit un récit unifié à partir de quels morceaux disparates ?</td>
+							</tr>
+						</table>
+					</section>
+
+					<!--                          -->
+					<!-- La narrativité graduelle -->
+					<!--                          -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">La narrativité graduelle (Marie-Laure Ryan)</h2>
+						<img 
+						  class="grande-frise"
+						  src="./societe-de-linformation-2/Narrativité_graduelle_MLRYAN.svg"
+						  style="width: 1000px;">
+					</section>
+
+					<!--                -->
+					<!-- La narrabilité -->
+					<!--                -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">La narra<em>bilité</em> (ou le storytelling)</h2>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<div style="width: 350px; margin: 10px 0; background-color: #27346f; border: 4px solid #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+								<p style="text-align: left; margin-left: 10px; margin-right: 10px; color: white; font-size: 0.8em;">L'histoire doit communiquer<br>du significatif à son destinataire.</p>
+								</div>
+							</div>
+							<div class="element">
+								<p>Ici, <strong>narrativité maximale</strong> =<br>on est totalement dans le régime du récit, donc :</p>
+							</div>
+						</div>
+						<div class="plusieurs-colonnes fragment fade-up" style="align-items: center; margin-top: 80px;">
+							<div class="element">
+								<div style="align-items: center; justify-content: center; background-color: #CEEAFB; border: 4px solid  #CEEAFB; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); width: 400px;">
+									<p style="text-align: center;"><strong>NARRABILITÉ</strong></p>
+									<ul>
+										<li style="font-size: 0.8em;"><strong>Clé n° 1 :</strong> imprévisibilité</li>
+										<li style="font-size: 0.8em;"><strong>Clé n° 2 :</strong> charge émotionnelle</li>
+										<li style="font-size: 0.8em;"><strong>Clé n° 3 :</strong> événements simples à résumer</li>
+										<li style="font-size: 0.8em;"><strong>Clé n° 4 :</strong> viralité</li>
+									</ul>
+								</div>
+							</div>
+							<div class="element">
+								<img 
+								  src="./societe-de-linformation-2/Fleche_rouge.svg">
+							</div>
+							<div class="element">
+								<p class="r-fit-text" style="margin-top: 10px;">STORYTELLING</p>
+							</div>
+						</div>
+					</section>
+
+					<!--                                -->
+					<!-- Hétérochronie à récit condensé -->
+					<!--                                -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">L'hétérochronie à récit condensé</h2>
+						<div class="r-stack">
+							<img 
+							  class="grande-frise fragment current-visible"
+							  src="./societe-de-linformation-2/Heterochronie_cond_1.svg"
+							  style="width: 1100px;">
+							<img 
+							  class="grande-frise fragment current-visible"
+							  src="./societe-de-linformation-2/Heterochronie_cond_2.svg"
+							  style="width: 1100px;">
+							 <img 
+							  class="grande-frise fragment current-visible"
+							  src="./societe-de-linformation-2/Heterochronie_cond_3.svg"
+							  style="width: 1100px;">
+							<img 
+							  class="grande-frise fragment current-visible"
+							  src="./societe-de-linformation-2/Heterochronie_cond_4.svg"
+							  style="width: 1100px;">
+						</div>
+					</section>
+
+					<!--                                 -->
+					<!-- Deux autres cas d'hétérochronie -->
+					<!--                                 -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Deux autres cas d'hétérochronie</h2>
+						<div class="plusieurs-colonnes fragment" style="align-items: center;">
+							<div class="element" style="flex: 1;">
+								<div style="background-color: #CEEAFB; border: 4px solid  #CEEAFB; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); width: 400px;">
+									<p style="text-align: center;"><strong>Isochronie</strong></p>
+								</div>
+							</div>
+							<div class="element">
+								<div style="	
+								  flex: 1;
+								  width: 100px;
+								  height: 40px;
+								  background-color: #EA7727;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								  display: flex;
+								  align-items: center;
+								  box-sizing: border-box;
+								  padding: 0 20px;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+								</div>
+							</div>
+							<div class="element" style="width: 800px; flex: 3;">
+								<img 
+								  src="./societe-de-linformation-2/isochronie.svg">
+							</div>
+						</div>
+						<div class="plusieurs-colonnes fragment" style="align-items: center;">
+							<div class="element" style="flex: 1;">
+								<div style="background-color: #CEEAFB; border: 4px solid  #CEEAFB; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); width: 400px;">
+									<p style="text-align: center;"><strong>Hétérochronie à récit dilué</strong></p>
+								</div>
+							</div>
+							<div class="element">
+								<div style="	
+								  flex: 1;
+								  width: 100px;
+								  height: 40px;
+								  background-color: #EA7727;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								  display: flex;
+								  align-items: center;
+								  box-sizing: border-box;
+								  padding: 0 20px;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4)">
+								</div>
+							</div>
+							<div class="element" style="width: 800px; flex: 3;">
+								<img 
+								  src="./societe-de-linformation-2/heterochronie_dilue.svg">
+							</div>
+						</div>
+					</section>
+
+					<!--                                -->
+					<!-- Les 5W et la pyramide inversée -->
+					<!--                                -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Les 5W et la Pyramide inversée</h2>
+						<div class="plusieurs-colonnes" style="align-items: center; margin-top: 50px;">
+							<div class="element">
+								<ul>
+									<li>What ? (Quoi ?)</li>
+									<br>
+									<li>Who ? (Qui ?)</li>
+									<br>
+									<li>Where ? (Où ?)</li>
+									<br>
+									<li>When ? (Quand ?)</li>
+									<br>
+									<li>Why ? (Pourquoi ?)</li>
+									<br>
+									<li><em>How ? (Comment ?)</em></li>
+								</ul>
+							</div>
+							<div class="element">
+								<img
+								  class="grande-frise"
+								  src="./societe-de-linformation-2/Structure_pyramide_article.svg"
+								  style="width: 700px;">
+							</div>
+						</div>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Les grands formats de l’information</h2>
+						<div class="plusieurs-colonnes" style="align-items: center;">
+							<div class="element">
+								<div style="background-color: #27346f; border: 4px solid  #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); width: auto; height: auto;">
+									<p style="text-align: center; color: white;"><strong>BRÈVE</strong></p>
+								<div style="background-color: #27346f; border: 4px solid  #27346f; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); width: auto; height: auto;">
+								 <p style="color: white;">ANALYSE</p>
+							</div>
+						</div>
+					</section>
+
+					<section class="slide-standard">
+					</section>
+					<section class="slide-standard">
+					</section>
+					<section class="slide-standard">
+					</section>
+					<section class="slide-standard">
+					</section>
+					<section class="slide-standard">
+					</section>
+					<section class="slide-standard">
+					</section>
+					</section>
+					<section class="slide-standard">
+					</section>
+					<section class="slide-titre" data-background-color="#0070b9">
+						<h1>On se revoit le 15 janvier pour la partie 2 !</h1>
+					</section>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/notes.js"></script>
+		<script src="dist/plugin/markdown.js"></script>
+		<script src="dist/plugin/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				margin: 0.0,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			});
+		</script>
+	</body>
+</html>

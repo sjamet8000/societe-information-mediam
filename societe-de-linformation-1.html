@@ -1,0 +1,2020 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+		/>
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css" />
+		<link rel="stylesheet" href="dist/reveal.css" />
+		<link rel="stylesheet" href="dist/theme/white.css" />
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="dist/plugin/highlight/monokai.css" />
+
+		<script type="module">
+		  import mermaid from
+			"https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+
+		  mermaid.initialize({
+			startOnLoad: true,
+			theme: "base",
+
+			themeVariables: {
+			fontFamily: "Arial, sans-serif",
+			fontSize: "16px"
+			},
+
+			flowchart: {
+			nodeSpacing: 20,
+			rankSpacing: 30,
+			diagramPadding: 5,
+			curve: "basis",
+			useMaxWidth: true
+			}
+		});
+		</script>
+		<style>
+			.reveal .slide-titre {
+			height: 100%;
+			box-sizing: border-box;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			padding: 60px;
+			
+			color: white;
+			text-align: center;
+			}
+
+			.reveal .slide-titre h1 {
+			  margin-top: 100px;
+			  color: white;
+
+			  font-size: 1.8em;
+			  line-height: 1.15;
+			  font-weight: bold;
+			}
+
+			.reveal .slide-standard {
+			  height: 100%;
+			  box-sizing: border-box;
+
+			  padding-top: 100px;
+			  text-align: left;
+
+			  font-size: 0.65em;
+			}
+
+			.reveal .slide-standard .grande-frise {
+			  display: block;
+			  width: 98%;
+			  max-width: none;
+			  height: auto;
+			  margin: 0 auto;
+			}
+
+			.reveal .titre-slide {
+  			  position: absolute;
+  			  top: 0;	
+  			  left: 0;
+
+  			  width: fit-content;
+  			  max-width: 100%;
+
+  			  margin: 0;
+  			  padding: 20px 70px 20px 35px;
+
+  			  color: white;
+  			  background: #27346f;
+
+  			  font-size: 1em;
+  			  line-height: 1;
+  			  text-align: left;
+
+  			  clip-path: polygon(
+  			  0 0,
+  			  100% 0,
+  			  100% 65%,
+  			  calc(100% - 55px) 65%,
+  			  calc(100% - 55px) 100%,
+  			  0 100%
+			  );
+			}
+
+			.reveal .zone-coin-droit {
+  			  position: fixed;
+  			  right: 0;
+  			  bottom: 0;
+
+  			  width: 800px;
+  			  height: 90px;
+  			  padding: 20px 25px;
+
+  			  display: flex;
+  			  justify-content: flex-end;
+ 			  align-items: flex-end;
+
+  			  background: #27346f;
+
+			  clip-path: polygon(
+  			  100px 0,
+  			  100% 0,
+  			  100% 100%,
+  			  0 100%,
+  			  0 20%,
+  			  100px 20%
+			);
+
+  			  z-index: 5;
+			  pointer-events: none;
+			}
+
+			.reveal .zone-coin-droit .logo-mediam {
+			display: none;
+			}
+
+			.reveal:has(.slide-titre.present) .zone-coin-droit {
+			background-color: white;
+			}
+
+			.reveal:has(.slide-titre.present) .zone-coin-droit .logo-mediam {
+			display: block;
+			width: 800px;
+			height: auto;
+			margin: 0;
+			}
+
+			.reveal .controls {
+  			  z-index: 30;
+  			  color: white;
+			}
+
+			.reveal:has(.slide-titre.present) .controls {
+			color: #0070b9;
+			}
+
+			.reveal .plusieurs-colonnes {
+  			  display: flex;
+  			  gap: 15px;
+  			  align-items: flex-start;
+			}
+
+			.reveal .plusieurs-colonnes .element {
+ 			  flex: 1;
+  			  text-align: center;
+			}
+
+			.reveal .plusieurs-colonnes img {
+  			  width: 100%;
+  			  height: auto;
+			}
+
+			.reveal .boite-image {
+  			  display: inline-block;
+  			  line-height: 0;
+			  border: 4px solid #000;
+  			  background-color: white;
+			  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+			}
+
+			.reveal .boite-image img {
+  			  display: block;
+  			  width: 100%;
+  			  margin: 0;
+			  max-width: none;
+			}
+
+			.reveal .image-et-texte {
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+			  gap: 35px;
+			  width: 100%;
+			}
+
+			.reveal .image-et-texte .boite-image {
+			  flex: 0 0 auto;
+			}
+
+			.reveal .image-et-texte .boite-image img {
+			  display: block;
+			  height: 250px;
+			  width: auto;
+			  margin: 0;
+			}
+
+			.reveal .texte-image {
+			  width: 40%;
+			  text-align: left;
+			}
+
+			.reveal .forme {
+			  display: flex;
+			  align-items: center;
+			  justify-content: center;
+
+			  padding: 15px;
+			  box-sizing: border-box;
+			  text-align: center;
+
+			  background-color: #D8EFDC;
+			  border: 4px solid #489773;
+			}
+
+			.reveal .cercle {
+			  border-radius: 50%;
+			}
+
+			.reveal pre.mermaid {
+			  width: 100%;
+			  max-width: none;
+			  margin: 0;
+			  background: transparent;
+			  box-shadow: none;
+			}
+
+			.reveal pre.mermaid {
+			  width: 90%;
+			  margin: 0 auto;
+			}
+
+			.reveal pre.mermaid svg {
+			  display: block;
+			  width: 100%;
+			  height: auto;
+		  	  max-height: 600px;
+			  margin: 0 auto;
+			}
+		</style>
+
+	</head>
+	<body>
+		<div class="reveal">
+
+			<div class="zone-coin-droit">
+				<img 
+				  class="logo-mediam" 
+				  src="societe-de-linformation-1/Logo_Mediam.png" 
+				  alt="Logo">
+			</div>
+
+				<div class="slides">
+
+					<section class="slide-titre" data-background-color="#0070b9">
+						<h1>[Culture générale] La société de l’information I</h1>
+						<p style="font-size: 0.7em; text-align: left;"><em>Samuel Jamet</em></p>
+						<p style="font-size: 0.7em; text-align: left;"><em>Université Paris Cité, BIUM</em></p>
+					</section>
+
+					<!--                -->
+					<!-- Je me présente -->
+					<!--                -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Je me présente</h2>
+						<p><strong>Samuel Jamet</strong></p>
+						<ul>
+							<li>Université Paris Cité</li>
+							<li>Direction Générale Deléguée aux Bibliothèques et Musées</li>
+							<li>Bibliothèque Interuniversitaire de Santé Médecine (BIUM)</li>
+							<li>Chargé de formation au sein de la cellule formation</li>
+						</ul>
+						<br>
+						<br>
+						<ul>
+							<li><strong>Contact : </strong><a href="mailto:samuel.jamet@u-pariscite.fr">samuel.jamet@u-pariscite.fr</a></li>
+						</ul>
+					</section>
+					
+					<!--                                 -->
+					<!-- Annonce du plan de la formation -->
+					<!--                                 -->
+					
+					<section class="slide-standard">
+						<h2 class="titre-slide">Plan de la formation</h2>
+						<div class="fragment fade-up" style="font-size: 0.8em; margin: 24px 0; padding: 18px 22px; background-color: #ceeafb; border-left: 4px solid #27346f; border-radius: 6px;">
+						<p style="margin: 0 0 8px 0; font-weight: bold; color: #27346f;">7 décembre 2026 - 9h-12h</p>
+						<ol>
+							<li>Une (courte) histoire du journalisme</li>
+							<li><strong>PAUSE</strong></li>
+							<li>La fabrique de l'information</li>
+							<ol>
+								<li>Réglementation, éthique et déontologie des médias ;</li>
+								<li>Les fondamentaux de la pratique du journalisme</li>
+							</ol>
+						</ol>
+						</div>
+						<div class="fragment fade-up" style="font-size: 0.8em; margin: 24px 0; padding: 18px 22px; background-color: #ceeafb; border-left: 4px solid #27346f; border-radius: 6px;">
+						<p style="margin: 0 0 8px 0; font-weight: bold; color: #27346f;">15 janvier 2027 - 9h-12h</p>
+						<ol>
+							<li>Comment raconter des histoires (vraies ou fausses)</li>
+							<ol>
+								<li>Narratologie médiatique : étude de cas ;</li>
+								<li>Analyse critique des médias ;</li>
+								<li>Quelques grands mécanisme de la désinformation</li>
+							</ol>
+							<li><strong>PAUSE</strong></li>
+							<li>Élément pour une littératie algorithmique.</li>
+						</ol>
+						</div>
+					</section>
+
+					<!--                                       -->
+					<!-- Première partie : Histoire du journal -->
+					<!--                                       -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Introduction</h2>
+						<img 
+						  class="grande-frise"
+						  src="societe-de-linformation-1/_Ste_info_Frise_chrono.svg" 
+						  alt="Frise chronologique">
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Mais avant... l'aube du journalisme en Europe</h2>
+						<div class="plusieurs-colonnes">
+							<div class="element" style="text-align: right;">
+								<p>Les foires marchandes ont servi de support à des publications :</p>
+								<ul>
+									<li>Périodiques</li>
+									<li>Informatives/documentaires</li>
+								</ul>
+								<p>… Qui doivent ressembler à ce genre de chose ➡️</p>
+                        		<p><em>(je n’ai pas trouvé de sources)</em></p>
+								<p style="text-align: left;">On y trouve la liste des foires prévues au cours de l’année…</p>
+								<div class="fragment" data-fragment-index="1">
+									<div class="plusieurs-colonnes" style="align-items: center;">
+										<div class="element">
+											<div class="boite-image">
+												<img
+    											  src="societe-de-linformation-1/almanach_1600_astro.jpg"
+    											  data-preview-image
+    											  alt="Almanach astrologique"
+												  style="height: auto; width: 180px;">
+											</div>
+										</div>
+										<div class="element">
+											<p style="text-align: left;">⬅️ …ou des prévisions astro-météorologiques.</p>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="element">
+								<div class="boite-image">
+									<img 
+									  src="societe-de-linformation-1/almanach_1600.jpg" 
+									  data-preview-image
+									  style="height: auto; width: 300px;"
+									  alt="Almanach de 1600">
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Le modèle français</h2>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element">
+									<div class="boite-image">
+										<img 
+										  src="societe-de-linformation-1/gazette30051631.png" 
+										  data-preview-image
+										  alt="Page de la Gazette">
+									</div>
+								</div>
+								<div class="element">
+									<p class="fragment">⬅️ Informations politiques et politique étrangère ➡️</p>
+									<p class="fragment">⬅️ Actualités de la Cour ➡️</p>
+									<p class="fragment" style="text-align: left;">⬅️ Production d’un philanthrope</p>
+									<p class="fragment" style="text-align: right;">Production des libraires et des imprimeurs parisiens ➡️</p>
+								</div>
+								<div class="element">
+									<div class="boite-image">
+										<img 
+										  src="societe-de-linformation-1/nouvelles_ordinaires_epstein.jpg" 
+										  data-preview-image
+										  alt="Une des Nouvelles Ordo=inaires">
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<p>Mis en place progressivement entre la fin du XVe et la moitié du XVIIe, le système de Privilège royal a pour but :</p>
+							<div class="plusieurs-colonnes">
+								<div class="element">
+									<div class="boite-image">
+										<img 
+										  src="societe-de-linformation-1/privilege_royal.png" 
+										  data-preview-image
+										  alt="Privilège royal">
+									</div>
+								</div>
+								<div class="element" style="justify-content: space-evenly; flex-direction: column; align-items: center;">
+									<div class="fragment" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Censure préalable</p>
+									</div>
+									<div class="fragment" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Protection/organisation de la concurrence/régulation</p>
+									</div>
+									<div class="fragment" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Censure après publication (au cas où)</p>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element">
+									<div style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Censure préalable</p>
+									</div>
+								</div>
+								<div class="element">
+									<img 
+									src="societe-de-linformation-1/Plus_bleu.svg"
+									alt="Plus" 
+									style="width: 50%">
+								</div>
+								<div class="element">
+									<div style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Protection/organisation de la concurrence/régulation</p>
+									</div>
+								</div>
+								<div class="element">
+									<img 
+									src="societe-de-linformation-1/Plus_bleu.svg" 
+									alt="Plus" 
+									style="width: 50%">
+								</div>
+								<div class="element">
+									<div style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center">Censure après publication (au cas où)</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element">
+									<img
+									src="societe-de-linformation-1/egal_bleu.svg"
+									alt="Egal"
+									style="width: 25%">
+								</div>
+								<div class="element">
+									<div style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+										<p style="text-align: center;">Une diffusion de l'information bien contrôlée</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="r-stack">
+
+  								<!-- Première apparition -->
+  								<div class="fragment fade-in-then-out image-et-texte">
+    								<div class="boite-image">
+      									<img
+        								  src="societe-de-linformation-1/gazette.png"
+        								  alt="Couverture de la Gazette"
+										  data-preview-image>
+    								</div>
+
+								<div class="texte-image">
+								<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">La Gazette</p>
+								<p>De l’information politique généraliste.</p>
+								</div>
+							</div>
+
+							<!-- Deuxième apparition -->
+							<div class="fragment fade-in-then-out image-et-texte">
+								<div class="boite-image">
+								<img
+									src="societe-de-linformation-1/le_journal_des_scavants.png"
+									alt="Couverture du Journal des Sçavants"
+									data-preview-image>
+								</div>
+
+								<div class="texte-image">
+								<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">Le Journal des Sçavants</p>
+								<p>Une proto-information littéraire et savante.</p>
+								</div>
+							</div>
+
+  								<!-- Troisième apparition -->
+  								<div class="fragment fade-in-then-out image-et-texte">
+    								<div class="boite-image">
+										<img
+										  src="societe-de-linformation-1/mercure_galant.png"
+										  alt="Couverture du Mercure galant"
+										  data-preview-image>
+										</div>
+
+    								<div class="texte-image">
+      									<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">Le Mercure galant</p>
+      									<p>Les gossips de la Cour, et du divertissement.</p>
+    								</div>
+  								</div>
+
+							</div>
+						</section>
+						<section class="slide-standard">
+							<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">Le système n'est pas sans faille</p>
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element" style="margin: 12px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+									<p style="text-align: left;">Louis XIV révoque l’Edit De Nantes en 1685, des protestants vont s’activer et une presse concurrente va naître</p>
+								</div>
+								<div class="element">
+									<img
+									src="societe-de-linformation-1/edit_de_nantes.jpg"
+									alt="Edit de Nantes"
+									data-preview-image
+									style="width: 35%;">
+								</div>
+							</div>
+							<div class="r-stack">
+									<!-- Première apparition -->
+								<div class="fragment fade-in-then-out image-et-texte">
+									<div class="boite-image">
+										<img
+										src="societe-de-linformation-1/gazette_amsterdam.png"
+										alt="Gazette d'Amsterdam"
+										data-preview-image>
+									</div>
+									<div class="texte-image">
+										<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">La Gazette d'Amsterdam</p>
+										<p>Un simili-Mercure Galant</p>
+									</div>
+								</div>
+
+								<!-- Deuxième apparition -->
+								<div class="fragment image-et-texte">
+									<div class="boite-image">
+										<img
+										src="societe-de-linformation-1/quintessence_nouvelle.png"
+										alt="La Quintessence des nouvelles historiques, politiques, morales et galantes"
+										data-preview-image>
+									</div>
+									<div class="texte-image">
+										<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">La Quintessence des nouvelles historiques, politiques, morales et galantes</p>
+										<p>Du commentaire politique</p>
+									</div>
+								</div>
+							</div>
+						</section>
+
+						<!-- Histoire de l'annonce de la mort de Louis XIV -->
+
+						<section class="slide-standard">
+							<div class="r-stack plusieurs-colonnes fragment">
+								<div class="element" style="flex: 0.01; margin: 10px 0;">
+									<div class="forme cercle" style="width: 80px; height: 80px; background-color: #27346f; border: 25px solid #27346f;">
+										<p class="r-fit-text" style="color: white;"><strong>1</strong></p>
+									</div>
+								</div>
+								<div class="element" style="flex: 1.99;">
+									<div style="width: 80%; max-width: 800px; margin: 0 0; box-sizing: border-box; border: 4px solid #FFF083; border-radius: 10px; box-shadow: 0 4px 12px rgba(30, 90, 138, 0.4); overflow: hidden; background-color: #FFFFFF;">
+										<div style="background-color: #FFF083; color: #000000; padding: 8px 14px; font-weight: bold;">
+										Annonce la mort de Louis XIV le 26/08/1715 dans l’édition du 02/09/1715
+										</div>
+										<img
+										  src="societe-de-linformation-1/quintessence_louisxiv_1.png"
+										  data-preview-image
+										  style="
+										    width: 100%;
+											display: block;
+											max-width: none;
+											max-height: none;
+											margin: 0;
+											padding: 0;
+											height: auto;">
+									</div>
+								</div>
+							</div>
+							<div class="r-stack plusieurs-colonnes fragment">
+								<div class="element" style="flex: 0.01; margin: 20px 0; padding: 20px;">
+									<div class="forme cercle" style="width: 80px; height: 80px; background-color: #27346f; border: 25px solid #27346f;">
+										<p class="r-fit-text" style="color: white;"><strong>2</strong></p>
+									</div>
+								</div>
+								<div class="element" style="flex: 1.99;">
+									<div style="width: 80%; max-width: 800px; margin: 0 0; box-sizing: border-box; border: 4px solid #FFF083; border-radius: 10px; box-shadow: 0 4px 12px rgba(30, 90, 138, 0.4); overflow: hidden; background-color: #FFFFFF;">
+										<div style="background-color: #FFF083; color: #000000; padding: 8px 14px; font-weight: bold;">
+										Le papier se dédit… juste un peu dans l’édition du 05/09/1715…
+										</div>
+										<img
+										  src="societe-de-linformation-1/quintessence_louisxiv_2.png"
+										  data-preview-image
+										  style="
+										    width: 100%;
+											display: block;
+											max-width: none;
+											max-height: none;
+											margin: 0;
+											padding: 0;
+											height: auto;">
+									</div>
+								</div>
+							</div>
+							<div class="r-stack plusieurs-colonnes fragment">
+								<div class="element" style="flex: 0.01; margin: 20px 0; padding: 40px;">
+									<div class="forme cercle" style="width: 80px; height: 80px; background-color: #27346f; border: 25px solid #27346f;">
+										<p class="r-fit-text" style="color: white;"><strong>3</strong></p>
+									</div>
+								</div>
+								<div class="element" style="flex: 1.99;">
+									<div style="width: 80%; max-width: 800px; margin: 0 0; box-sizing: border-box; border: 4px solid #FFF083; border-radius: 10px; box-shadow: 0 4px 12px rgba(30, 90, 138, 0.4); overflow: hidden; background-color: #FFFFFF;">
+										<div style="background-color: #FFF083; color: #000000; padding: 8px 14px; font-weight: bold;">
+										… pour se dédire dans la même édition, par ce post-scriptum un peu laconique.
+										</div>
+										<img
+										  src="societe-de-linformation-1/quintessence_louisxiv_3.png"
+										  data-preview-image
+										  style="
+										    width: 100%;
+											display: block;
+											max-width: none;
+											max-height: none;
+											margin: 0;
+											padding: 0;
+											height: auto;">
+									</div>
+								</div>
+							</div>		
+						</section>
+
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element">
+									<p>Début XVIIIe, un peu de diversification.</p>
+									<div 
+									  class="boite-image"
+									  style="
+									    width: 60%;">
+										<img
+										  src="societe-de-linformation-1/observation_ecrits_modernes.png"
+										  data-preview-image
+										  alt="Obervations sur les écrits modernes"
+										  style="
+										    max-width: none;">
+									</div>
+								</div>
+								<div class="element">
+									<div 
+									  class="boite-image"
+									  style="
+									    width: 70%;">
+										<img
+										  src="societe-de-linformation-1/annee_litteraire.png"
+										  data-preview-image
+										  style="
+										    max-width: none;">
+									</div>
+								</div>
+								<div class="element" style="flex: 0.5;">
+									<p>Fréron = l’un des pires ennemis de Voltaire</p>
+									<img
+									  src="societe-de-linformation-1/freron_medaillon.png"
+									  data-preview-image
+									  style="
+									    width: 50%;
+										max-width: none;">
+								</div>
+							</div>
+						</section>
+
+						<!-- Focus sur la Une du Journal de Paris -->
+
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element" style="text-align: right; font-size: 1.4em">
+									<div class="v-stack">
+										<div class="fragment fade-left" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-right: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Titre d’information générale</p>
+										</div>
+										<div class="fragment fade-left" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-right: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Questions politiques</p>
+										</div>
+										<div class="fragment fade-left" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-right: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Sujets culturels (programmation musicale et théâtrale)</p>
+										</div>
+										<div class="fragment fade-left" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-right: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Du divertissement...</p>
+										</div>
+									</div>
+								</div>
+								<div class="element">
+									<div class="boite-image">
+										<img
+										  src="societe-de-linformation-1/journal_de_paris.png"
+										  data-preview-image
+										  alt="Une du Journal de Paris">
+									</div>
+								</div>
+							</div>
+						</section>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Deuxième partie</h2>
+						<img 
+						  class="grande-frise"
+						  src="societe-de-linformation-1/_Ste_info_Frise_chrono_2.svg" 
+						  alt="Frise chronologique 2">
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Une synthèse des luttes</h2>
+						<img 
+						  class="grande-frise"
+						  src="societe-de-linformation-1/_Ste_info_Frise_chrono_XIX.svg">
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Bodleian_Libraries_Le_tapecu.jpg" data-background-opacity="0.15"; class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+						<section class="slide-standard">
+							<pre class="mermaid">
+							flowchart LR
+
+								1["`**Premier Consul Bonaparte**`"]
+								2("`Décret du 17 janvier 1800*`")
+								3("`Interdiction de paraître pour<br>50 journaux parisiens`")
+								4("`Contrôle des 13 journaux restants par le<br>ministre de la police`")
+
+								1 --> 2
+								2 --> 3
+								2 --> 4	
+							</pre>
+
+							<p style="font-size: 0.5em">*<em>« Art. 1er. Le ministre de la police ne laissera, pendant toute la durée de la guerre, imprimer, publier et distribuer que les journaux ci-après désignés :</em></p> 
+
+							<p style="font-size: 0.5em"><em>Le Moniteur universel ; le Journal des débats et des décrets ; le Journal de Paris ; le Bien-informé ; le Publiciste ; l’Ami des lois ; la Clef du cabinet ; le Citoyen français ; la Gazette de France ; le Journal des hommes libres ; le Journal du soir par les frères Chaigneau ; le Journal des défenseurs de la patrie ; la Décade philosophique »</em></p>
+
+						</section>
+
+						<section class="slide-standard">
+							<div class="mermaid">
+								flowchart LR
+									1["<strong>Napoléon 1er</strong>"]
+									2("Décret du 05 février 1810 contenant<br>règlement sur l’imprimerie et la librairie")
+									3("Rétablissement de la censure préalable")
+									4("Fin du libre exercice des<br>imprimeurs et des libraires")
+									5("Contrôle du nombre d’imprimeurs par<br>départements")
+
+									1 --> 2
+									2 --> 3
+									2 --> 4
+									2 --> 5
+							</div>
+						</section>
+					</section>
+					<section data-background-image="societe-de-linformation-1/Un_Gourmand.jpg" data-background-opacity="0.15"; class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+							<pre class="mermaid">
+								flowchart LR
+
+									1["<strong>Louis XVIII</strong>"]
+									2("Charte constitutionnelle de 1814<br>Fin de la censure de la presse")
+									3("« <em>Art. 8. – Les Français ont le droit<br>de publier et de faire imprimer<br>leurs opinions</em> »")
+									4("Commission de censure en 1820")
+									5("Transmission des textes<br>des journaux 12h avant publication")
+									6("Cautionnement à la création de<br>titres en cas de frais de justice")
+
+								1 --> 2
+								1 --> 4
+								2 --> 3
+								4 --> 5
+								4 --> 6
+							</pre>
+
+						<p style="font-size: 0.5em">Crédit image fond : By Isaac Cruikshank - This file comes from <a rel="nofollow" class="external text" href="https://gallica.bnf.fr/">Gallica Digital Library</a> and is available under the digital ID <a rel="nofollow" class="external text" href="https://gallica.bnf.fr/ark:/12148/btv1b6954789n">btv1b6954789n</a>, Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=69449647">Link</a></p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Caricature_Charles_X.jpg" data-background-opacity="0.15"; class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+							<pre class="mermaid">
+								flowchart LR
+
+									1["`**Charles X**`"]
+									2("Les Six Ordonnances de<br>Saint-Cloud en 1830")
+									3("Suspension de la liberté de la presse")
+
+									1 --> 2
+									2 --> 3
+							</pre>
+						<p style="font-size: 0.5em">Crédit image fond : By Bibliothèque nationale de France, Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=161124717">Link</a></p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Honore_Daumier_Gargantua.jpg" data-background-opacity="0.15";   class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+						<div class="r-stack">	
+							<pre class="mermaid">
+								flowchart LR
+
+									1["`**Louis-Philippe Ier**`"]
+									2("Charte constitutionnelle de 1830")
+									3("L. du 09/09/1835 ")
+									4("Liberté de la presse garantie")
+									5("Offenses au roi (Art. 2)")
+									6("Attaque contre le principe ou la forme<br>du gouvernement (Art. 5)")
+									7("Le fait de se qualifier comm républicain<br>(Art. 7)")
+
+									1 --> 2
+									1 --> 3
+									2 --> 4
+									3 --> 5
+									3 --> 6
+									3 --> 7
+							</pre>
+							<div class="plusieurs-colonnes">
+								<div class="boite-image fragment" style="height: 500px">
+									<img
+									src="societe-de-linformation-1/la_caricature_1830.jpg"
+									alt="Une de La caricature, 1830"
+									data-preview-image
+									/>
+								</div>
+								<div class="boite-image fragment" style="height: 500px">
+									<img
+									src="societe-de-linformation-1/le_charivari_1832.jpg"
+									alt="Une du Charivari, 1832"
+									data-preview-image
+									/>
+								</div>
+							</div>
+						</div>
+
+						<p style="font-size: 0.5em">Par <a href="https://en.wikipedia.org/wiki/fr:Honor%C3%A9_Daumier" class="extiw" title="w:fr:Honoré Daumier"><span title="graveur, caricaturiste, peintre et sculpteur français (1808–1879)">Honoré Daumier</span></a> — [<a rel="nofollow" class="external free" href="https://www.gazette-drouot.com/en/lots/11233943">https://www.gazette-drouot.com/en/lots/11233943</a> Gazette Drouot, Domaine public, <a href="https://commons.wikimedia.org/w/index.php?curid=38997">Lien</a></p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Louis_Marie_Bosredon_le_vote_ou_le_fusil.jpg" data-background-opacity="0.15"; class="slide-standard" data-background-size="1000px">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+						<div class="mermaid">
+							flowchart LR
+
+								1["`**IIe République**`"]
+								2("Gouvernement provisoire de 1830")
+								3("Assemblée Nationale Constituante")
+								4("Assemblée Nationale Législative")
+								5("Suppression de toute censure préalable")
+								6("Suppression de l’impôt sur<br>le timbre sur les périodiques")
+								7("Suppression du cautionnement")
+								8("D. du 11/08/1848 relatif à la répression<br>des crimes et délits commis par<br>voie de presse")
+								9("L. du 27/07/1849 sur la presse")
+
+								1 --> 2
+								1 --> 3
+								1 --> 4
+								2 --> 5
+								2 --> 6
+								2 --> 7
+								3 --> 8
+								4 --> 9
+						</div>
+
+						<p style="font-size: 0.5em">Par Louis Marie Bosredon (1815-1881) — https://histoire-image.org/fr/etudes/vote-fusil,<br>Domaine public, https://commons.wikimedia.org/w/index.php?curid=90388489</p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Actualités_59_La_chasse_aux_Ministres.jpg" data-background-opacity="0.15"; class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+						<pre class="mermaid">
+							flowchart LR
+
+								1["`**Napoléon III**`"]
+								2("Décret Organique sur la presse (1852)")
+								3("L. Du 11/05/1868")
+								4("Rétablissement de la censure préalable")
+								5("Rétablissement du cautionnement<br>en cas de poursuite juridique")
+								6("Rétablissement de l'impôt sur le timbre")
+								7("Suppression de la censure<br>préalable pour la plupart des cas")
+								8("Suppression/réduction de l’impôt<br>sur le timbre")
+
+								1 --> 2
+								1 --> 3
+								2 --> 4
+								2 --> 5
+								2 --> 6
+								3 --> 7
+								3 --> 8
+						</pre>
+						<p style="font-size: 0.5em">By Vernier, Charles (23–04–1813 - 02–08–1892), dessinateur-lithographe - <a rel="nofollow" class="external free" href="https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/actualites-59-la-chasse-aux-ministres#infos-principales">https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/actualites-59-la-chasse-aux-ministres#infos-principales</a>, <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" title="Creative Commons Zero, Public Domain Dedication">CC0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=131724433">Link</a></p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/Defense_dafficher_l_du_29_juillet_1881_Paris_Rue_de_lecole-de-Medecine.jpg" data-background-opacity="0.15"; class="slide-standard">
+						<h2 class="titre-slide">De la menace au contre pouvoir</h2>
+						<div class="mermaid">
+							flowchart LR
+
+							  1["`**IIIe République**`"]
+							  2("`L. du 29/07/1881 sur la liberté<br>de la presse`")
+							  3("`Suppression complète 
+							  de la censure préalable`")
+							  4("Suppression du cautionnement")
+							  5("Suppression du timbre fiscal")
+							  6("Définition des délits de presse<br>et droit de réponse (diffamation,<br>provocation...)")
+
+							  1 --> 2
+							  2 --> 3
+							  2 --> 4
+							  2 --> 5
+							  2 --> 6
+						</div>
+						<p style="font-size: 0.5em">Par <a href="//commons.wikimedia.org/wiki/User:Poulpy" title="User:Poulpy">Poulpy</a> — <span class="int-own-work">Photographie personnelle</span>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=19973919">Lien</a></p>
+					</section>
+
+					<section data-background-image="societe-de-linformation-1/fleche_prix.svg" data-background-size="1200px" class="slide-standard">
+						<h2 class="titre-slide">Aspects techniques et éditoriaux</h2>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center;">
+								<div class="element">
+									<div class="boite-image">
+										<img
+										  src="societe-de-linformation-1/presse_gutenberg.jpg"
+										  data-preview-image
+										  alt="Presse Gutenberg">
+									</div>
+								</div>
+								<div class="element" style="text-align: right; font-size: 1.4em">
+									<div class="v-stack">
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Presse à bras ou presse Gutenberg</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">150/200 feuilles/heure</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+								<div class="element">
+									<div class="boite-image" style="height: auto; width: 350px;">
+										<img
+										  src="societe-de-linformation-1/presse_stanhope.png"
+										  data-preview-image
+										  alt="Presse Gutenberg">
+									</div>
+								</div>
+								<div class="element" style="text-align: right; font-size: 1.4em">
+									<div class="v-stack">
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Presse Stanhope</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Fin XVIIIe siècle</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">150/200 feuilles/heure</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+								<div class="element">
+									<div class="boite-image">
+										<img
+										  src="societe-de-linformation-1/rotatives.png"
+										  data-preview-image
+										  alt="Presse Gutenberg">
+									</div>
+								</div>
+								<div class="element" style="text-align: right; font-size: 1.4em">
+									<div class="v-stack">
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Rotatives</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Moitié du XIXe siècle</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">18 000 exemplaires/heure</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+								<div class="element">
+									<div class="boite-image">
+										<img
+										  src="societe-de-linformation-1/rotatives_offset.png"
+										  data-preview-image
+										  alt="Rotatives offset">
+									</div>
+								</div>
+								<div class="element" style="text-align: right; font-size: 1.4em">
+									<div class="v-stack">
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Rotatives offset</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">Années 1970</p>
+										</div>
+										<div class="fragment fade-right" style="margin: 24px 0; padding: 10px 10px; background-color: #D8EFDC; border-left: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4);">
+											<p style="text-align: center">80 000 exemplaires/heure</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Aspect techniques et éditoriaux</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							L'image</p>
+						<p>Le XIXe siècle connait d’importantes évolutions techniques concernant l’image, en particulier la photographie mais la photographie n’est pas praticable sur tous les terrains, donc peu utilisée.<br>C’est donc la gravure sur bois qui va être privilégiée pour longtemps</p>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<p style="text-align: left;">Néanmoins l’image devient un véritable procédé informationnel « sérieux » et documentaire, voire pédagogique (en plus d’un moyen de divertir évidemment)</p>
+							</div>
+							<div class="element fragment fade-up">
+								<div class="boite-image" style="height: auto; width: 180px;">
+									<img
+										src="societe-de-linformation-1/lillustration.png"
+										data-preview-image
+										alt="Une de L'Illustration">
+								</div>
+								<div
+          							style="position: absolute; bottom: 2%; left: 35%; transform: translate(-50%, -50%) rotate(-8deg); color: #ea7727; font-size: 1em; font-weight: bold; background: rgba(255,255,255,0.85); padding: 1px 6px; border-radius: 4px;">
+          							1845
+								</div>
+							</div>
+							<div class="element fragment fade-up">
+								<div class="boite-image" style="height: auto; width: 180px;">
+									<img
+										src="societe-de-linformation-1/le_petit_parisien_illus.jpg"
+										data-preview-image
+										alt="Une du Petit Parisien Illustré">
+								</div>
+								<div
+          							style="position: absolute; bottom: 2%; left: 35%; transform: translate(-50%, -50%) rotate(-8deg); color: #ea7727; font-size: 1em; font-weight: bold; background: rgba(255,255,255,0.85); padding: 1px 6px; border-radius: 4px;">
+          							1903
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- De l'An 1 à l'âge d'or -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">De l'An 1 à l'âge d'or</h2>
+						<div class="plusieurs-colonnes" style="position: relative; align-items: center; margin-top: 40px;">
+							<div class="fragment" style="
+								position: absolute;
+								top: -50px;
+								left: 22.7%;
+								width: 850px;
+								height: 40px;
+								margin-bottom: 10px;
+								background-color: #EA7727;
+								box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								display: flex;
+								align-items: center;
+								box-sizing: border-box;
+								padding: 0 20px;
+								" data-fragment-index="6">
+								<p style="font-size: 0.6em; margin: 0; color: #ffff"><strong>Prix du n° à 5 centimes</strong></p>
+							</div>
+						</div>
+						<div class="plusieurs-colonnes" style="align-items: center; margin-top: 12px;" data-id="presse-all">
+							<div class="element fragment fade-up" data-fragment-index="1">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/La_presse_girardin.jpg"
+									  data-preview-image
+									  alt="Une de La Presse"
+									  style="height: 275px; width: auto;">
+								</div>
+								<div style="max-width: 85%; margin: auto; box-sizing: border-box; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); ">
+									<p><strong>1836</strong></p>
+								</div>
+							</div>
+							<div class="element fragment fade-up" data-fragment-index="2">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/le_petit_journal.jpg"
+									  data-preview-image
+									  alt="Une du Petit Journal"
+									  style="height: 275px; width: auto;">
+								</div>
+								<div style="max-width: 85%; margin: auto; box-sizing: border-box; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); ">
+									<p><strong>1863</strong></p>
+								</div>
+							</div>
+							<div class="element fragment fade-up" data-fragment-index="3">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/le_petit_parisien.jpg"
+									  data-preview-image
+									  alt="Une du Petit Parisien"
+									  style="height: 275px; width: auto;">
+								</div>
+								<div style="max-width: 85%; margin: auto; box-sizing: border-box; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); ">
+									<p><strong>1876</strong></p>
+								</div>
+							</div>
+							<div class="element fragment fade-up" data-fragment-index="4">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/le_matin.jpg"
+									  data-preview-image
+									  alt="Une du Matin"
+									  style="height: 275px; width: auto;">
+								</div>
+								<div style="max-width: 85%; margin: auto; box-sizing: border-box; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); ">
+									<p><strong>1882</strong></p>
+								</div>
+							</div>
+							<div class="element fragment fade-up" data-fragment-index="5">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/le_journal.jpg"
+									  data-preview-image
+									  alt="Une du Journal"
+									  style="height: 275px; width: auto;">
+								</div>
+								<div style="max-width: 85%; margin: auto; box-sizing: border-box; background-color: #D8EFDC; border: 4px solid #489773; border-radius: 6px; box-shadow: 0 4px 12px rgba(30,90,138,0.4); ">
+									<p><strong>1892</strong></p>
+								</div>
+							</div>
+						</div>	
+						<div class="plusieurs-colonnes" style="position: relative; align-items: center; margin-top: 5px;">
+							<div class="fragment" style="
+								position: absolute;
+								top: -50px;
+								width: 1070px;
+								height: 40px;
+								margin-top: 70px;
+								background-color: #EA7727;
+								box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								display: flex;
+								align-items: center;
+								box-sizing: border-box;
+								padding: 0 20px;"
+								data-fragment-index="7">
+								<p style="font-size: 0.6em; margin: 0; color: #ffff"><strong>Le nombre de colonnes à la Une augmente</strong></p>
+							</div>
+						</div>
+					</section>
+
+					<!-- La presse en temps de guerre -->
+					<!-- La presse contrôlée          -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">La presse en temps de guerre</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							La presse contrôlée</p>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<p><strong>02/08/1914</strong> : l’état de siège est<br>décrété</p>
+								<div class="boite-image">
+									<img
+									src="societe-de-linformation-1/1914_etat_siege.png"
+									alt="Etat de siège décrété"
+									data-preview-image>
+								</div>
+							</div>
+							<div class="element">
+								<ul>
+									<li class="fragment" data-fragment-index="1">Tous les pouvoirs sont concentrés entre les mains des militaires</li>
+									<li class="fragment" data-fragment-index="2">Suspension de la liberté de la presse</li>
+									<li class="fragment" data-fragment-index="3">Création d’un bureau de la presse au ministère de la Guerre</li>
+									<ul>
+										<li class="fragment" data-fragment-index="4">Rétablissement de la censure préalable</li>
+										<li class="fragment" data-fragment-index="5">Censure « a posteriori », Caviardage… </li>
+									</ul>
+								</ul>
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<div class="boite-image fragment" data-fragment-index="5">
+											<img
+											src="societe-de-linformation-1/1914_allier.png"
+											data-preview-image
+											alt="Une de La Croix de l'Allier"
+											style="height: 120px; width: auto;">
+										</div>
+									</div>
+									<div class="element">
+										<div class="boite-image fragment" data-fragment-index="6">
+											<img
+											  src="societe-de-linformation-1/1914_eclair.png"
+											  data-preview-image
+											  alt="Une de l'Eclair"
+											  style="height: 120px; width: auto;">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- La presse en temps de guerre -->
+					<!-- La presse TRES contrôlée     -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">La presse en temps de guerre</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							La presse TRÈS contrôlée</p>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<p>L. du 05/08/1914 réprimant les indiscrétions<br>de la presse en temps de guerre</p>
+								<div class="boite-image">
+									<img
+									src="societe-de-linformation-1/LOI_05081914.png"
+									data-preview-image
+									alt="Loi du  05/08/1914 réprimant les indiscrétions de la presse en temps de guerre">
+								</div>
+							</div>
+							<div class="element">
+								<p>Création d’un organe de presse militaire chargé de diffuser une <em>certaine information</em> à l’arrière</p>
+								<div class="plusieurs-colonnes">
+									<div class="element fragment">
+										<div class="boite-image">
+											<img
+											  src="societe-de-linformation-1/Matin_cosaques.jpg"
+											  alt="Une du Matin titrant Les cosaques à cinq étapes de Berlin"
+											  data-preview-image
+											  style="height: 300px; width: auto;">
+										</div>
+									</div>
+									<div class="element">
+										<p class="fragment" style="font-size: 0.8em;">➡️ <strong>FAUX</strong>, les cosaques étaient bien plus éloignés et en mauvaise posture face aux allemands</p>
+										<p class="fragment" style="font-size: 0.8em;">➡️ <strong>TREMBLEUR = TRAITRE</strong><br>Les trembleurs sont les pacifistes</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<!-- La presse en temps de guerre -->
+					<!-- La presse alternative        -->
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">La presse en temps de guerre</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							La presse alternative</p>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment">
+								<p>Au front : les canards</p>
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/canard_boyau.png"
+									  alt="Le Canard du boyau"
+									  data-preview-image
+									  style="height: 350px; width: auto;">
+								</div>
+							</div>
+							<div class="element fragment">
+								<p>A l’arrière : <em>le</em> Canard</p>
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/canard_enchaine.jpg"
+									  alt="Une du premier numéro du Canard Enchaîné"
+									  data-preview-image
+									  style="height: 350px; width: auto;">
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Conclusion/Transition : la confiance rompue</h2>
+						<p>La presse va se remettre du conflit, mais la confiance des lecteurs est écornée, le système médiatique a montré sa fragilité</p>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment" data-fragment-index="2">
+								<div class="boite-image">
+									<img
+									src="societe-de-linformation-1/Une_la_presse_nungesser.jpg"
+									alt="Une de la Presse sur le décollage de Nungesser et Coli"
+									data-preview-image
+									style="height: 320px; width: auto;">
+								</div>
+								<p style="font-size: 0.6em;">Une de <em>La Presse</em> du 10/05/1927</p>
+							</div>
+							<div class="element fragment" data-fragment-index="1">
+								<p>Des scandales médiatiques comme l’affaire de <strong>l’Oiseau Blanc</strong>, démarré et couvert par <em>La Presse</em> (de Girardin)</p>
+							</div>
+							<div class="element fragment" data-fragment-index="3">
+								<div class="boite-image">
+									<img
+									src="societe-de-linformation-1/Une_la_presse_nungesser_2.jpg"
+									alt="Une de la Presse sur la disparition de l'avion de Nungesser et Coli"
+									data-preview-image
+									style="height: 320px; width: auto;">
+								</div>
+								<p style="font-size: 0.6em;">Une de <em>La Presse</em> du 11/05/1927</p>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">La fondation du SNJ</h2>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<p>Mars 1918 : Fondation du <strong>Syndicat des journalistes</strong></p>
+								<div class="boite-image" style="margin-top: 50px;">
+									<img
+									  src="societe-de-linformation-1/bull_synd_journalistes.png"
+									  alt="Bulletin du Syndicat des Journalistes de 1928"
+									  data-preview-image>
+								</div>
+								<p class="fragment" style="margin-top: 50px;">Association de <strong>défense</strong> et de <strong>discipline</strong> professionnelle</p>
+							</div>
+							<div class="element">
+								<p class="fragment" style="text-align: left;">Deux objectifs :</p>
+								<ul>
+									<li class="fragment">Elaboration d’un code des devoirs du journaliste</li>
+									<li class="fragment">Créer les bases d’un droit du travail spécifique au métier de journaliste</li>
+								</ul>
+								<div class="plusieurs-colonnes fragment" style="margin-top: 40px;">
+									<div class="element">
+										<div class="boite-image">
+											<img
+											  src="societe-de-linformation-1/BourdonGeorgesNadar.jpg"
+											  data-preview-image
+											  alt="Portrait de Georges Bourdon par Nadar"
+											  style="height: 300px; width: auto;">
+										</div>
+									</div>
+									<div class="element">
+										<p><strong>Georges Bourdon</strong>, président du SNJ entre 1922 et 1938, artisan du statut de journaliste en France</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">La Charte de 1918</h2>
+						<section class="slide-standard">
+							<div class="r-stack">
+								<div class="boite-image">
+									<img
+									  class="r-stretch"	
+									  src="societe-de-linformation-1/bull_synd_journalistes_full.png"
+									  data-preview-image
+									  alt="Une du Bulletin du Syndicat des journalistes de décembre 1923"
+									  style="height: 800px; width: auto;">
+								</div>
+								<div class="boite-image fragment" style="margin-bottom: 500px;">
+									<img
+										src="societe-de-linformation-1/bull_synd_journalistes_digne.png"
+										data-preview-image
+										alt="Paragraphe sur les devoirs d'un journaliste">
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<p style="font-size: 1.2em">Un journaliste digne de ce nom :</p>
+							<div class="plusieurs-colonnes">
+								<div class="element" style="font-size: 1.2em">
+									<ul>
+										<li>prend la responsabilité de tous ses écrits, même anonymes ;</li>
+										<li>tient la <strong style="color: red">calomnie</strong>, les <strong style="color: red">accusation sans preuve</strong>, l’<strong style="color: red">altération des documents</strong>, la <strong style="color: red">déformation des faits</strong>, le <strong style="color: red">mensonge</strong> pour les plus graves <strong style="color: red">fautes professionnelles</strong> ;</li>
+										<li>ne reconnaît que la <strong style="color: red">juridiction de ses pairs</strong>, souveraine en matière d’honneur professionnel ;</li>
+										<li>s’interdit d’invoquer un titre ou une qualité imaginaire, d’user de <strong style="color: red">moyens déloyaux</strong> pour obtenir une information ou surprendre la bonne foi de quiconque ;</li>
+										<li>ne touche pas d’argent dans un service public ou une entreprise privée où sa qualité de journaliste, ses influences, ses relations seraient susceptibles d’être exploitées ;</li>
+									</ul>
+								</div>
+								<div class="element" style="font-size: 1.2em">
+									<ul>
+										<li>ne signe pas de son nom des articles de <strong style="color: red">réclame commerciale</strong> ou financière ;</li>
+										<li>ne commet aucun <strong style="color: red">plagiat</strong>, <strong style="color: red">cite</strong> les confrères dont il reproduit un texte quelconque ;</li>
+										<li>garde le <strong style="color: red">secret professionnel</strong> ;</li>
+										<li>n’use pas de la liberté de la presse dans une intention intéressée ;</li>
+										<li>revendique la <strong style="color: red">liberté</strong> de publier honnêtement ses informations ;</li>
+										<li>tient le scrupule et le <strong style="color: red">souci de la justice</strong> pour des règles premières ;</li>
+										<li>ne confond pas son rôle avec celui du <strong style="color: red">policier</strong></li>
+									</ul>
+								</div>
+							</div>
+						</section>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Premier pilier du métier : la loi Brachard</h2>
+						<p style="text-align: center;">Loi du 29 mars 1935 relative au statut professionnel des journalistes dite <strong>loi Brachard</strong></p>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment">
+								<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+									<div class="element">
+										<div class="forme cercle"
+											style="width: 30px; height: 30px;
+													background-color: #27346f;
+													border: 25px solid #27346f;">
+										<p class="r-fit-text" style="color: white;">
+											<strong>1</strong>
+										</p>
+										</div>
+									</div>
+
+									<div class="element">
+										<p>Une <strong>définition</strong> du métier</p>
+									</div>
+								</div>
+								<p>La définition actuelle, <strong>art. L-7111-3 du code du travail</strong> :</p>
+								<p style="font-size: 0.65em;"><em>Est journaliste professionnel toute personne qui a pour activité principale, régulière et rétribuée, l’exercice de sa profession dans une ou plusieurs entreprises de presse, publications quotidiennes et périodiques ou agences de presse et qui en tire le principal de ses ressources.</em></p>
+							</div>
+							<div class="element fragment">
+								<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+									<div class="element">
+										<div class="forme cercle" style="width: 30px; height: 30px; background-color: #27346f; border: 25px solid #27346f;">
+											<p class="r-fit-text" style="color: white;"><strong>2</strong></p>
+									</div>
+									</div>
+									<div class="element">
+										<p>Une <strong>carte d'identité</strong> professionnelle</p>
+									</div>
+								</div>
+								<p>Commission de la Carte d’identité des journalistes professionnels (<strong>CCIJP</strong>)</p>
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/carte3-1024x605.jpg"
+									  data-preview-image
+									  alt="Illustration carte de presse CCIJP">
+								</div>
+								<p style="text-align: left; font-size: 0.2em;">Crédit : CCIJP</p>
+							</div>
+							<div class="element fragment">
+								<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+									<div class="element">
+										<div class="forme cercle" style="width: 30px; height: 30px; background-color: #27346f; border: 25px solid #27346f;">
+											<p class="r-fit-text" style="color: white;"><strong>3</strong></p>
+										</div>
+									</div>
+									<div class="element">
+										<p>Des dispositions <strong>protectrices</strong></p>
+									</div>
+								</div>
+								<ul>
+									<li style="font-size: 0.8em;"><strong>Clause de conscience :</strong> possibilité de rompre le contrat en cas de changement de ligne éditoriale</li>
+									<li style="font-size: 0.8em;"><strong>Clause de cession :</strong> possibilité de rompre le contrat en cas de changement de propriétaire </li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Deuxième pilier : la Loi du 4 juillet 1974 dite Loi Cressard</h2>
+						<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+							<div class="element">
+								<p><strong>PIGISTES</strong></p>
+								<p>i.e. les personnes rémunérées à la pige (article, reportage, photographie…)</p>
+							</div>
+							<div class="element">
+								<div style="	
+								  width: 300px;
+								  height: 40px;
+								  margin-top: 70px;
+								  background-color: #EA7727;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								  display: flex;
+								  align-items: center;
+								  box-sizing: border-box;
+								  padding: 0 20px;">
+								  <p style="font-size: 0.6em; margin: 0; color: #ffff"><strong>intègrent</strong></p>
+								</div>
+							</div>
+							<div class="element">
+								<p>Statut juridique des journalistes</p>
+								<div class="forme cercle" style="width: 300px; height: 300px; background-color: white; border: 8px solid #27346f;">
+									<p style="font-size: 1.5em"><strong>Loi Brachard</strong></p>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Troisième pilier : la loi 1982</h2>
+						<p>Loi du 29 juillet 1982 sur la communication audiovisuelle</p>
+						<div class="plusieurs-colonnes" style="align-items: center; justify-content: center;">
+							<div class="element">
+								<p><strong>Les personnes travaillant dans l'audiovisuel</strong></p>
+								<p>dans les entreprises de communication au public par voie électronique</p>
+							</div>
+							<div class="element">
+								<div style="	
+								  width: 300px;
+								  height: 40px;
+								  margin-top: 70px;
+								  background-color: #EA7727;
+								  box-shadow: 0 4px 12px rgba(30,90,138,0.4);
+								  clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%);
+								  display: flex;
+								  align-items: center;
+								  box-sizing: border-box;
+								  padding: 0 20px;">
+								  <p style="font-size: 0.6em; margin: 0; color: #ffff"><strong>intègrent</strong></p>
+								</div>
+							</div>
+							<div class="element">
+								<p>Statut juridique des journalistes</p>
+								<div class="forme cercle" style="width: 300px; height: 300px; background-color: white; border: 8px solid #27346f;">
+									<p style="font-size: 1.5em"><strong>Loi Brachard</strong><br><strong>Loi Cressard</strong></p>
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Déontologie du journalisme</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							Charte du SNJ : deux révisions en 1938 et en 2011, quelques exemples de modifications :</p>
+						<ul>
+							<li class="fragment"><em>prend la responsabilité de <del><strong>tous ses écrits</strong></del> <strong style="background-color: yellow;">toutes ses productions professionnelles</strong>, même anonymes</em></li>
+							<li class="fragment"><em><strong style="background-color: yellow;">tient l’esprit critique, la véracité, l’exactitude, l’intégrité, l’équité, l’impartialité, pour les piliers de l’action journalistique</strong> ; tient l’accusation sans preuve, <strong style="background-color: yellow;">l’intention de nuire</strong>, l’altération des documents, la déformation des faits, <strong style="background-color: yellow;">le détournement d’images</strong>, le mensonge, <strong style="background-color: yellow;">la manipulation, la censure et l’autocensure, la non vérification des faits, pour les plus graves dérives professionnelles</strong> ;</em></li>
+							<li class="fragment"><em>garde le secret professionnel <strong style="background-color: yellow;">et protège les sources de ses informations</strong> ;</em></li>
+							<li class="fragment"><em>cite les confrères <del><strong>dont il reproduit un texte quelconque</strong></del> <strong style="background-color: yellow;">utilise le travail</strong>, ne commet aucun plagiat ;</em></li>
+							<li class="fragment"><em>ne confond pas son rôle avec celui du policier <strong style="background-color: yellow;">ou du juge</strong> ;</em></li>
+						</ul>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Déontologie du journalisme</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							La Charte de Munich, 1971</p>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment" style="font-size: 0.52em;">
+								<p style="text-align: left;"><strong>Les dix devoirs de la charte :</strong></p>
+								<ul>
+									<li><strong style="background-color: yellow;">Respecter la vérité</strong>, quelles qu’en puissent être les conséquences pour lui-même, et ce, en raison du droit que le public a de connaître la vérité.</li>
+									<li><strong style="background-color: yellow;">Défendre la liberté de l’information, du commentaire et de la critique.</strong></li>
+									<li>Publier seulement les informations <strong style="background-color: yellow;">dont l’origine</strong> est connue ou les accompagner, si c’est nécessaire, des réserves qui s’imposent ; ne pas supprimer les informations essentielles et ne pas altérer les textes et les documents.</li>
+									<li>Ne pas user de <strong style="background-color: yellow;">méthodes déloyales</strong> pour obtenir des informations, des photographies et des documents.</li>
+									<li>S’obliger à respecter la <strong style="background-color: yellow;">vie privée</strong> des personnes.</li>
+									<li><strong style="background-color: yellow;">Rectifier</strong> toute information publiée qui se révèle inexacte.</li>
+									<li>Garder le secret professionnel et ne pas divulguer la source des informations obtenues confidentiellement.</li>
+									<li>S’interdire le <strong style="background-color: yellow;">plagiat, la calomnie, la diffamation, les accusations sans fondement</strong> ainsi que de recevoir un quelconque avantage en raison de la publication ou de la suppression d’une information.</li>
+									<li>Ne jamais confondre le métier de journaliste avec celui du <strong style="background-color: yellow;">publicitaire</strong> ou du <strong style="background-color: yellow;">propagandiste</strong> ; n’accepter aucune consigne, directe ou indirecte, des annonceurs.</li>
+									<li>Refuser toute pression et n’accepter de directives rédactionnelles que des responsables de la rédaction.</li>
+								</ul>
+							</div>
+							<div class="element fragment" style="font-size: 0.52em;">
+								<p style="text-align: left;"><strong>Les cinq droits de la charte</strong></p>
+								<ul>
+									<li>Les journalistes revendiquent le <strong style="background-color: yellow;">libre accès à toutes les sources d’information et le droit d’enquêter librement</strong> sur tous les faits qui conditionnent la vie publique. Le secret des affaires publiques ou privées ne peut en ce cas être opposé au journaliste que par exception en vertu de motifs clairement exprimés.</li>
+									<li>Le journaliste a le droit de <strong style="background-color: yellow;">refuser toute subordination</strong> qui serait contraire à la ligne générale de son entreprise, telle qu’elle est déterminée par écrit dans son contrat d’engagement, de même que toute subordination qui ne serait pas clairement impliquée par cette ligne générale.</li>
+									<li>Le journaliste ne peut être contraint à accomplir un acte professionnel ou à exprimer une opinion qui serait contraire à sa conviction ou sa conscience.</li>
+									<li><strong style="background-color: yellow;">L’équipe rédactionnelle doit être obligatoirement informée de toute décision importante de nature à affecter la vie de l’entreprise</strong>. Elle doit être au moins consultée, avant décision définitive, sur toute mesure intéressant la composition de la rédaction : embauche, licenciement, mutation et promotion de journaliste.</li>
+									<li>En considération de sa fonction et de ses responsabilités, le journaliste a droit non seulement au bénéfice des <strong style="background-color: yellow;">conventions collectives</strong>, mais aussi à un <strong style="background-color: yellow;">contrat personnel</strong> assurant sa sécurité matérielle et morale ainsi qu’une rémunération correspondant au rôle social qui est le sien et suffisante pour garantir son <strong style="background-color: yellow;">indépendance économique</strong>.</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Déontologie du journalisme</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							Un exemple de charte locale et un exemple de charte mondiale</p>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/charte_afp.png"
+									  data-preview-image
+									  alt="Charte de l'Agence France Presse"
+									  style="height: 350px; width: auto;">
+								</div>
+								<p style="font-size: 0.7em;">La charte de l’<strong>Agence France Presse</strong></p>
+							</div>
+							<div class="element fragment">
+								<div class="boite-image">
+									<img
+									  src="societe-de-linformation-1/charte_mondiale.png"
+									  data-preview-image
+									  alt="La charte d’éthique mondiale des journalistes de la Fédération internationale des journalistes de Tunis"
+									  style="height: 350px; width: auto;">
+								</div>
+								<p style="font-size: 0.7em;">La charte d’éthique mondiale des journalistes de la <strong>Fédération internationale des journalistes</strong> de Tunis, 2019</p>
+							</div>
+						</div>
+					</section>
+					<section>
+						<section class="slide-standard">
+							<h2 class="titre-slide">Journalisme et communication</h2>
+							<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							Une confusion entretenue par les « ménages »</p>
+							<div class="r-stack">
+								<div class="boite-image" style="height: 500px; width: auto;">
+									<img
+									src="societe-de-linformation-1/acrimed.png"
+									data-preview-image
+									alt="Capture d'une page du site web d'Acrimed">
+								</div>
+								<div class="boite-image fragment" style="height: 500px; width: auto;">
+									<img
+									  src="societe-de-linformation-1/acrimed_2.png"
+									  data-preview-image
+									  alt="Capture d'une page du site web d'Acrimed">
+								</div>
+							</div>
+						</section>
+						<section class="slide-standard">
+							<h2 class="titre-slide">Journalisme et communication</h2>
+							<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							Une confusion entretenue par les « ménages »</p>
+							<div class="r-stack">
+								<div class="plusieurs-colonnes">
+									<div class="element">
+										<div class="boite-image">
+											<img
+										  	  src="societe-de-linformation-1/francois_lenglet_fraude.png"
+										  	  data-preview-image
+									      	  alt="Un ménage de François Lenglet présenté comme "économiste sur France 2">
+										</div>
+									</div>
+									<div class="element fragment">
+										<p>⬅️ Un exemple avec François Lenglet, « économiste sur France 2 » (!?)</p>
+									</div>
+								</div>
+								<div class="boite-image fragment">
+									<img
+									  src="societe-de-linformation-1/francois_lenglet_fraude_wiki.png"
+									  data-preview-image
+									  alt="Extrait de la page Wikipédia de François Lenglet">
+								</div>
+							</div>
+						</section>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Journalisme et communication</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							Les pressions</p>
+						<div class="r-stack">
+							<div class="boite-image">
+								<img
+								  src="societe-de-linformation-1/pressions_monsanto.png"
+								  data-preview-image
+								  alt="Extrait article du Monde sur les Bonus Eventus Files">
+							</div>
+							<div class="boite-image fragment">
+								<img
+								  src="societe-de-linformation-1/pressions_monsanto_2.png"
+								  data-preview-image
+								  alt="Extrait article du Monde sur les Bonus Eventus Files">
+							</div>
+							<div class="boite-image fragment">
+								<img
+								  src="societe-de-linformation-1/pressions_monsanto_3.png"
+								  data-preview-image
+								  alt="Extrait article du Monde sur les Bonus Eventus Files">
+							</div>
+							<div class="boite-image fragment">
+								<img
+								  src="societe-de-linformation-1/pression_arnault.png"
+								  data-preview-image
+								  alt="Extrait article du Monde pression de Bernard Arnault">
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Journalisme et communication</h2>
+						<div class="plusieurs-colonnes" style="align-items: center;">
+							<div class="element">
+								<p>Un doute ?</p>
+								<p style="font-size: 0.75em;"><strong>Le syndicat du Conseil en Relation Publics</strong> met à disposition une liste de chartes des relations publiques, même si… ce ne sont que des chartes.</p>
+							</div>
+							<div class="element">
+								<p style="font-size: 1.5em;">➡️</p>
+							</div>
+							<div class="element">
+								<div class="boite-image" style="height: auto; width: 500px;">
+									<img
+									  src="societe-de-linformation-1/Deontologie_relation_presse.png"
+								  	  data-preview-image
+								  	  alt="Extrait article du Monde pression de Bernard Arnault">
+								</div>
+							</div>
+						</div>
+					</section>
+					<section class="slide-standard" data-center="true">
+						<h2 class="titre-slide">Les fondamentaux de la pratique du journalisme</h2>
+						<pre class="mermaid">
+							---
+							config:
+							  layout: elk
+							  theme: base
+							---
+							flowchart LR
+
+							  id1(<strong>Les types de médias et supports</strong>)
+							  id21(Les agences de presse)
+							  id22(La presse écrite)
+							  id23(La radio)
+							  id24(La télévision)
+							  id25(Internet et les pure players)
+							  id211(Production et diffusion<br>vers d’autres médias)
+							  id221("`Quotidiens (PQN et PQR)`")
+							  id222(Magazines)
+							  id231(Radios publiques)
+							  id232(Radios privées)
+							  id241(Chaînes publiques)
+							  id242(Chaînes privées)
+							  id251(Sites de médias)
+							  id252(Pure players)
+							  id253(Editeurs de contenus)
+
+							  id1 --> id21
+							  id1 --> id22
+							  id1 --> id23
+							  id1 --> id24
+							  id1 --> id25
+							  id21 --> id211
+							  id22 --> id221
+							  id22 --> id222
+							  id23 --> id231
+							  id23 --> id232
+							  id24 --> id241
+							  id24 --> id242
+							  id25 --> id251
+							  id25 --> id252
+							  id25 --> id253
+							  
+							  classDef default stroke:#489773,stroke-width:4px;
+						</pre>
+					</section>
+					<section class="slide-standard">
+						<h2 class="titre-slide">Les fondamentaux de la pratique du journalisme</h2>
+						<p style="margin: 0 0 8px 0; font-weight: bold; font-size:1.2em; color: #27346f;">
+							La composition d'une rédaction</p>
+						<pre class="mermaid">
+							mindmap
+								root(<strong>Direction de<br>la rédaction</strong>)
+									Rédacteur⋅ice en chef
+										Chef⋅fe de service<br>/ de rubrique
+											Journaliste spécialisé⋅e<br>/ rubricard⋅e
+											Reporter /<br>grand reporter
+											Rédacteur⋅ice
+											Correspondant⋅e
+											Reporter photographe
+											Localier
+											Rédacteur⋅ice TV/radio
+											Journaliste reporter<br>d’image ou JRI
+											Présentateur⋅ice TV/radio
+										Chef⋅fe d'édition										
+						</pre>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Le journaliste et ses sources</h2>
+						<div class="plusieurs-colonnes fragment">
+							<div class="element">
+								<p>Les sources primaires</p>
+							</div>
+							<div class="element">
+								<p>➡️</p>
+							</div>	
+							<div class="element">
+								<p>Accès direct dans intermédiaire</p>
+							</div>
+						</div>
+						<div class="plusieurs-colonnes fragment">
+							<div class="element">
+								<p>Les sources secondaires</p>
+							</div>
+							<div class="element">
+								<p>➡️</p>
+							</div>	
+							<div class="element">
+								<p>Un ou plusieurs intermédiaire</p>
+							</div>
+						</div>
+						<div class="plusieurs-colonnes">
+							<div class="element fragment">
+								<p>Anonymat des sources</p>
+								<ul>
+									<li>Pratique qui fait débat dans les rédactions, notamment pour le cas des « ballons d’essai »</li>
+									<li>Notion de « off » dans le journalisme d’investigation</li>
+								</ul>
+							</div>
+							<div class="element fragment">
+								<p>Protection des sources</p>
+								<ul>
+									<li>Consacrée depuis la loi du 29/07/1881</li>
+									<li>Fragilisée avec la loi du 30/07/2018 relative au secret des affaires (Art. L. 151-4)</li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<section class="slide-standard">
+							<h2 class="titre-slide">Les modèles économiques les plus courants</h2>
+							<img
+							src="societe-de-linformation-1/modele_eco_le_monde.png"
+							data-preview-image
+							style="height: auto; width: 2000px;"
+							alt="Modèle économique du Monde">
+						</section>
+						<section class="slide-standard" data-center="true">
+							<h2 class="titre-slide">Les modèles économiques les plus courants</h2>
+							<div class="mermaid">
+							flowchart LR
+								id1(5 sources courantes de revenus)
+								id11(La vente au n°)
+								id12(L’abonnement numérique et papier)
+								id13(Les subventions publiques/privées)
+								id14(La publicité)
+								id15(La diversification)
+								id151(Partenariat)
+								id152(Evenementiel)
+
+								id1 --> id11
+								id1 --> id12
+								id1 --> id13
+								id1 --> id14
+								id1 --> id15
+								id14 -. Effondrement des<br>revenus publicitaires .-> id15
+								id15 --> id151
+								id15 --> id152
+							</div>
+						</section>
+					</section>
+
+					</section>
+
+					<section>
+						<section class="slide-standard">
+							<h2 class="titre-slide">D'autres modèles économiques</h2>
+						</section>
+
+						<section class="slide-standard">
+							<h2 class="titre-slide">D'autres modèles économiques</h2>
+							<div class="grande-frise">
+								<img
+								  src="societe-de-linformation-1/Modeles_eco_medias.svg">
+								<img
+								  src="societe-de-linformation-1/Modeles_eco_brute.svg">
+							</div>
+						</section>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Les subventions publiques</h2>
+							<div class="r-stack">
+								<pre class="mermaid fragment fade-in-then-out">
+								pie title Répartition des aides à la presse en 2023
+									"Aides directes" : 71
+									"Aides exceptionnelles papier" : 15
+									"Aides à la filière" : 14
+								</pre>
+								<pre class="mermaid fragment">
+								pie title Répartition des aides directes
+									"Aides à l'exemplaire posté" : 52
+									"Aides à l'exemplaire porté" : 24
+									"Aides au pluralisme" : 17
+									"FSEIP" : 1
+									"FSDP" : 6
+								</pre>
+							</div>
+					</section>
+
+					<section>
+
+						<section class="slide-standard">
+							<h2 class="titre-slide">Qui possède quoi ?</h2>
+							<p>Voici le cas d’un nouveau média qui cherche à réunir le capital nécessaire à son démarrage</p>
+							<div class="plusieurs-colonnes">
+								<div class="element fragment" style="font-size: 0.8em;">
+									<p style="text-align: left;">Le capital nécessaire estimé (pour une entreprise de 40 salariés) : <strong>2,2 millions d’€</strong>. On a :</p>
+									<ul>
+										<li>2 fondateurs pouvant apporter chacun un capital de <strong>400 000€</strong> (reste 1,4 millions d’€)</li>
+										<li>Une prise de participation d’un fonds d’investissement d’<strong>1 million d’€</strong> (reste 400 000€)</li>
+										<li>Les 40 salariés s’engagent chacun à hauteur de <strong>5000€</strong> (reste 200 000€)</li>
+										<li>A travers une association défendant le pluralisme dans la presse, on lève les <strong>200 000€</strong> restants avec 2000 dons de 100€</li>
+									</ul>
+									<p style="font-size: 0.45em;">Cagé, Julia. Sauver les médias: capitalisme, financement participatif et démocratie. Seuil, 2015.</p>
+								</div>
+								<div class="element fragment">
+									<p style="font-size: 0.8em;">On a donc une répartition de ce genre au lancement</p>
+									<p>⬇️</p>
+									<pre class="mermaid">
+									pie title Répartition du capital
+										"Fonds d'investissement" : 1000000
+										"Petits actionnaires" : 200000
+										"Fondateur 1" : 400000
+										"Fondateur 2" : 400000
+									</pre>
+								</div>
+							</div>
+						</section>
+
+						<section class="slide-standard">
+							<h2 class="titre-slide">Qui possède quoi ?</h2>
+							<p>Et voici le cas de ce même média qui, quelques années plus tard se trouve en difficulté financière</p>
+							<div class="plusieurs-colonnes">
+								<div class="element" style="font-size: 0.8em;">
+									<p style="text-align: left;">On décide d’ouvrir le capital, le groupe XX propose  d’investir <strong>1,5 millions d’€</strong></p>
+									<ul>
+										<li>2 fondateurs pouvant apporter chacun un capital de <strong>400 000€</strong> (reste 1,4 millions d’€)</li>
+										<li>Une prise de participation d’un fonds d’investissement d’<strong>1 million d’€</strong> (reste 400 000€)</li>
+										<li>Les 40 salariés s’engagent chacun à hauteur de <strong>5000€</strong> (reste 200 000€)</li>
+										<li>A travers une association défendant le pluralisme dans la presse, on lève les <strong>200 000€</strong> restants avec 2000 dons de 100€</li>
+									</ul>
+									<p style="font-size: 0.45em;">Cagé, Julia. Sauver les médias: capitalisme, financement participatif et démocratie. Seuil, 2015.</p>
+								</div>
+								<div class="element fragment">
+									<p style="font-size: 0.8em;">On a donc un changement de répartition capitalistique.</p>
+									<p>⬇️</p>
+									<pre class="mermaid">
+									pie title Répartition du capital
+										"Fonds d'investissement" : 1000000
+										"Groupe XX" : 1500000
+										"Petits actionnaires" : 200000
+										"Fondateur 1" : 400000
+										"Fondateur 2" : 400000
+									</pre>
+								</div>
+							</div>
+						</section>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Le cas Hersant</h2>
+						<div class="plusieurs-colonnes">
+							<div class="element">
+								<p style="text-align: left;">Fondateur et PDG du Groupe Hersant et de la Socpresse</p>
+								<p style="text-align: left;">Surnommé le Papivore</p>
+								<p style="text-align: left;">Collaborationniste</p>
+								<p style="text-align: left;">Il possèdera à son apogée, via le groupe Hersant et la Socpresse</p>
+								<ul>
+									<li>Le Figaro (plus Figaro Magazine, Madame Figaro)</li>
+									<li>France-Soir</li>
+									<li>La Voix du Nord</li>
+									<li>Le Midi libre</li>
+									<li>L’Est Républicain</li>
+									<li>Et BEAUCOUP d’autres titres</li>
+								</ul>
+								<p style="text-align: left;">A tel point que sera voté en 1984, pour le contrer, une loi visant à limiter la concentration et à assurer la transparence financière et le pluralisme des entreprises de presse.</p>
+								<p style="text-align: left;">Loi qui sera abrogée en 1986.</p>
+							</div>
+						</div>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Piste pour un modèle alternatif : la société de médias</h2>
+						<p>Les avantages de la société de médias</p>
+						<ul>
+							<li class="fragment">Société à but non lucratif = possibilité de de faire des dons sans limitation de montant ;</li>
+							<li class="fragment">Fonctionnement type <strong>fondation</strong> : le capital social investis est bloqué et ne peux être retiré que sous des conditions strictes ;</li>
+							<li class="fragment">A la différence de la fondation : participer au capital donne lieu pour le donateur à des droits politiques au sein de la société de média ;</li>
+							<li class="fragment">Pour éviter l’écueil de la société par action : fixation d’un seuil de participation au-delà duquel les droits de votes progressent moins que proportionnellement avec l’apport en capital (Vous doublez le capital d’une société de média  : vous ne prenez pas 50% des droits de vote mais vous vous portez à 35 ou 40% selon le coefficient de minoration) ;</li>
+							<li class="fragment">Les dons peuvent être défiscalisés.</li>
+						</ul>
+					</section>
+
+					<section class="slide-standard">
+						<h2 class="titre-slide">Piste pour un modèle alternatif : la société de médias</h2>
+						<p>Reprenons le cas d’un nouveau média qui cherche à réunir le capital nécessaire à son démarrage avec un statut de Société de médias à but non lucratif</p>
+							<div class="plusieurs-colonnes">
+								<div class="element" style="font-size: 0.8em;">
+									<p style="text-align: left;">Le capital nécessaire estimé (pour une entreprise de 40 salariés) : <strong>2,2 millions d’€</strong>. On a :</p>
+									<ul>
+										<li>2 fondateurs pouvant apporter chacun un capital de 400 000€</li>
+										<li>Les 40 salariés se réunissent en société des salariés chacun et participent à hauteur de 600 000€</li>
+										<li>Les donateurs particuliers se réunissent en société des lecteurs et participent à hauteur de 800 000€</li>
+									</ul>
+									<p style="font-size: 0.45em;">Cagé, Julia. Sauver les médias: capitalisme, financement participatif et démocratie. Seuil, 2015.</p>
+								</div>
+								<div class="element fragment">
+									<p style="font-size: 0.68em; text-align: left">Dans une société de médias, on aurait une répartition de ce genre (avec le seuil de participation au-delà duquel le pouvoir politique augmente moins vite que l’apport en capital et sans prise de participation d’un fond d’investissement)</p>
+									<pre class="mermaid">
+									pie title Répartition du capital
+										"Société des salariés" : 31
+										"Société des lecteurs" : 41
+										"Fondateur 1" : 14
+										"Fondateur 2" : 14
+									</pre>
+								</div>
+							</div>
+					</section>
+
+					<section class="slide-titre" data-background-color="#0070b9">
+						<h1>On se revoit le 15 janvier pour la partie 2 !</h1>
+					</section>
+
+				</div>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/notes.js"></script>
+		<script src="dist/plugin/markdown.js"></script>
+		<script src="dist/plugin/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				center: false,
+				margin: 0.0,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+			});
+		</script>
+	</body>
+</html>
